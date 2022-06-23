@@ -214,7 +214,7 @@ func ShowWinMessage():
 
 
 # ........................................ INPUTS ..... ...........................................................#
-# INPUTS INPUTS INPUTS INPUTS INPUTS INPUTS INPUTS INPUTS INPUTS INPUTS INPUTS INPUTS INPUTS INPUTS INPUTS INPUTS 
+# INPUTS INPUTS INPUTS INPUTS INPUTS INPUTS INPUTS INPUTS INPUTS INPUTS INPUTS INPUTS INPUTS INPUTS INPUTS INPUTS  #
 #..................................................................................................................#
 
 

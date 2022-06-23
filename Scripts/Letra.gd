@@ -39,9 +39,9 @@ func flipLetter():
 	yield($AnimationPlayer, "animation_finished")
 	match CURRENT_STATE:
 		"Grey":
-			$BackgroundNode.texture = load("res://Letras/cuadro_fondo_gris.png")
+			$BackgroundNode.texture = load("res://Letras/cuadro_fondo_gris2.png")
 		"Yellow":
-			$BackgroundNode.texture = load("res://Letras/cuadro_fondo_amarillo.png")
+			$BackgroundNode.texture = load("res://Letras/cuadro_fondo_amarillo2.png")
 		"Green":
-			$BackgroundNode.texture = load("res://Letras/cuadro_fondo_verde.png")
+			$BackgroundNode.texture = load("res://Letras/cuadro_fondo_verde2.png")
 	$AnimationPlayer.play("FlipLetter2")

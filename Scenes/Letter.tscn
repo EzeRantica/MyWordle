@@ -1,8 +1,8 @@
 [gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://Scripts/Letra.gd" type="Script" id=1]
-[ext_resource path="res://Letras/CuadroVacio_transparente.png" type="Texture" id=2]
-[ext_resource path="res://Letras/cuadro_fondo_transparente.png" type="Texture" id=3]
+[ext_resource path="res://Letras/cuadro_fondo_transparente2.png" type="Texture" id=2]
+[ext_resource path="res://Letras/CuadroVacio_transparente2.png" type="Texture" id=3]
 [ext_resource path="res://Fonts/HelveticaNeueBold.ttf" type="DynamicFontData" id=4]
 
 [sub_resource type="DynamicFont" id=9]
@@ -149,19 +149,19 @@ CURRENT_LETTER = "A"
 CURRENT_STATE = "White"
 
 [node name="BackgroundNode" type="Sprite" parent="."]
-position = Vector2( 40, 40 )
-texture = ExtResource( 3 )
+position = Vector2( 33, 33 )
+texture = ExtResource( 2 )
 
 [node name="BoxNode" type="Sprite" parent="."]
-position = Vector2( 40, 40 )
-texture = ExtResource( 2 )
+position = Vector2( 33, 33 )
+texture = ExtResource( 3 )
 
 [node name="TextNode" type="Label" parent="."]
 self_modulate = Color( 0.180392, 0.180392, 0.180392, 1 )
-margin_left = 25.0
-margin_top = 20.0
-margin_right = 54.0
-margin_bottom = 59.0
+margin_left = 18.0
+margin_top = 13.0
+margin_right = 47.0001
+margin_bottom = 52.0
 theme = SubResource( 10 )
 text = "M"
 align = 1
