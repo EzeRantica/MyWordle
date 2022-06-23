@@ -137,8 +137,8 @@ stretch_mode = 7
 [node name="RowsContainer" type="VBoxContainer" parent="Main/HCenterContainer/CenterContent"]
 margin_top = 74.0
 margin_right = 426.0
-margin_bottom = 504.0
-rect_min_size = Vector2( 0, 430 )
+margin_bottom = 474.0
+rect_min_size = Vector2( 0, 400 )
 
 [node name="HBoxContainer" type="VBoxContainer" parent="Main/HCenterContainer"]
 margin_left = 860.0
