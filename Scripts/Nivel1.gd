@@ -43,6 +43,7 @@ func _ready():
 	for i in ROWS:
 		var row = HBoxContainer.new()
 		var rowWidth = $Main/HCenterContainer/CenterContent/RowsContainer.rect_size.x
+		var rowHeight = ($Main/HCenterContainer/CenterContent/RowsContainer.rect_size.y / 6)
 		row.alignment = BoxContainer.ALIGN_CENTER
 		row.rect_min_size = Vector2(426,50)
 		#Creación de cada CAJA de Caracteres (Escena de Letter.tscn)
@@ -51,7 +52,8 @@ func _ready():
 			letter.CURRENT_STATE = "White"
 			letter.CURRENT_LETTER = "NULL"
 			row.add_child(letter, true)
-		row.rect_size.y = rowWidth / LETTER_COUNT
+		row.rect_min_size = Vector2(rowWidth, rowHeight)
+		row.rect_size.y = rowHeight
 		$Main/HCenterContainer/CenterContent/RowsContainer.add_child(row, true)
 	
 	#Creación del teclado virtual

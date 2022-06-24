@@ -43,6 +43,7 @@ func _ready():
 	for i in ROWS:
 		var row = HBoxContainer.new()
 		var rowWidth = $Main/HCenterContainer/CenterContent/RowsContainer.rect_size.x
+		var rowHeight = ($Main/HCenterContainer/CenterContent/RowsContainer.rect_size.y / 6)
 		row.alignment = BoxContainer.ALIGN_CENTER
 		row.rect_min_size = Vector2(426,50)
 		#Creación de cada CAJA de Caracteres (Escena de Letter.tscn)
@@ -51,7 +52,8 @@ func _ready():
 			letter.CURRENT_STATE = "White"
 			letter.CURRENT_LETTER = "NULL"
 			row.add_child(letter, true)
-		row.rect_size.y = rowWidth / LETTER_COUNT
+		row.rect_min_size = Vector2(rowWidth, rowHeight)
+		row.rect_size.y = rowHeight
 		$Main/HCenterContainer/CenterContent/RowsContainer.add_child(row, true)
 	
 	#Creación del teclado virtual
@@ -201,7 +203,7 @@ func CalcularEstados(palabra):
 
 func ShowWinMessage():
 	var WinMessage = WinMessageScene.instance()
-	var posX = get_viewport().get_visible_rect().size.x / 2
+	var posX = get_viewport().get_visible_rect().size.x / 6
 	var posY = get_viewport().get_visible_rect().size.y / 2
 	WinMessage.position = Vector2(posX, posY)
 	WinMessage.connect("SiguienPalabraPressed", self, "_on_WinMessage_SiguientePalabraPressed")
@@ -214,7 +216,7 @@ func ShowWinMessage():
 
 
 # ........................................ INPUTS ..... ...........................................................#
-# INPUTS INPUTS INPUTS INPUTS INPUTS INPUTS INPUTS INPUTS INPUTS INPUTS INPUTS INPUTS INPUTS INPUTS INPUTS INPUTS 
+# INPUTS INPUTS INPUTS INPUTS INPUTS INPUTS INPUTS INPUTS INPUTS INPUTS INPUTS INPUTS INPUTS INPUTS INPUTS INPUTS  #
 #..................................................................................................................#
 
 
@@ -411,4 +413,4 @@ func _on_ErrorAnimationPlayer_animation_finished(anim_name):
 func _on_WinMessage_SiguientePalabraPressed():
 	var response = get_tree().change_scene_to(NextLevel)
 	if response == ERR_CANT_CREATE:
-		print("Unable to change to " + String(NextLevel) + ", check Nivel2 '_on_WinMessage_SiguientePalabraPressed()'")
+		print("Unable to change to " + String(NextLevel) + ", check Nivel1 '_on_WinMessage_SiguientePalabraPressed()'")

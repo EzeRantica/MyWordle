@@ -1,7 +1,6 @@
 [gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://Scripts/Letra.gd" type="Script" id=1]
-[ext_resource path="res://Letras/cuadro_fondo_transparente2.png" type="Texture" id=2]
 [ext_resource path="res://Letras/CuadroVacio_transparente2.png" type="Texture" id=3]
 [ext_resource path="res://Fonts/HelveticaNeueBold.ttf" type="DynamicFontData" id=4]
 
@@ -50,8 +49,8 @@ tracks/2/loop_wrap = true
 tracks/2/imported = false
 tracks/2/enabled = true
 tracks/2/keys = {
-"points": PoolRealArray( 18, -0.25, 0, 0.198, 21.5, 40, -0.197, -22.5, 0.142, 30.5 ),
-"times": PoolRealArray( 0, 0.2 )
+"points": PoolRealArray( 0, -0.201, -33.5, 0.201, 33.5, 33, -0.24, -41.5, 0.24, 41.5, 33, -0.202, -35.5, 0.202, 35.5 ),
+"times": PoolRealArray( 0, 0.2, 0.201 )
 }
 tracks/3/type = "value"
 tracks/3/path = NodePath("TextNode:rect_scale")
@@ -64,6 +63,42 @@ tracks/3/keys = {
 "transitions": PoolRealArray( 1, 1 ),
 "update": 0,
 "values": [ Vector2( 1, 1 ), Vector2( 1, 1e-05 ) ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("TextNode:margin_left")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ 0.0 ]
+}
+tracks/5/type = "value"
+tracks/5/path = NodePath("TextNode:margin_top")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ 0.0 ]
+}
+tracks/6/type = "value"
+tracks/6/path = NodePath("TextNode:margin_bottom")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ 66.0 ]
 }
 
 [sub_resource type="Animation" id=7]
@@ -113,8 +148,57 @@ tracks/3/loop_wrap = true
 tracks/3/imported = false
 tracks/3/enabled = true
 tracks/3/keys = {
-"points": PoolRealArray( 40, -0.25, 0, 0.2, -21.5, 18, -0.199, 21.5, 0.25, 0 ),
+"points": PoolRealArray( 33, -0.2, 32.5, 0.2, -32.5, 0, -0.25, 41.5, 0.25, -41.5 ),
 "times": PoolRealArray( 0, 0.2 )
+}
+
+[sub_resource type="Animation" id=11]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath("TextNode:margin_left")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 0.0 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("TextNode:margin_top")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 18.0 ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("TextNode:margin_bottom")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 66.0 ]
+}
+tracks/3/type = "bezier"
+tracks/3/path = NodePath("TextNode:rect_position:y")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"points": PoolRealArray( 0, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0 )
 }
 
 [sub_resource type="Animation" id=5]
@@ -138,19 +222,16 @@ tracks/0/keys = {
 resource_name = "Wrong"
 
 [node name="Letra" type="CenterContainer"]
-margin_right = 80.0
-margin_bottom = 80.0
-rect_min_size = Vector2( 80, 80 )
+margin_right = 66.0
+margin_bottom = 66.0
+rect_min_size = Vector2( 66, 66 )
 script = ExtResource( 1 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
 CURRENT_LETTER = "A"
 CURRENT_STATE = "White"
 
 [node name="BackgroundNode" type="Sprite" parent="."]
 position = Vector2( 33, 33 )
-texture = ExtResource( 2 )
+texture = ExtResource( 3 )
 
 [node name="BoxNode" type="Sprite" parent="."]
 position = Vector2( 33, 33 )
@@ -158,10 +239,9 @@ texture = ExtResource( 3 )
 
 [node name="TextNode" type="Label" parent="."]
 self_modulate = Color( 0.180392, 0.180392, 0.180392, 1 )
-margin_left = 18.0
-margin_top = 13.0
-margin_right = 47.0001
-margin_bottom = 52.0
+margin_right = 66.0
+margin_bottom = 66.0
+rect_min_size = Vector2( 66, 66 )
 theme = SubResource( 10 )
 text = "M"
 align = 1
@@ -174,5 +254,6 @@ __meta__ = {
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 anims/FlipLetter1 = SubResource( 6 )
 anims/FlipLetter2 = SubResource( 7 )
+anims/RESET = SubResource( 11 )
 anims/UpdateLetter = SubResource( 5 )
 anims/Wrong = SubResource( 8 )
