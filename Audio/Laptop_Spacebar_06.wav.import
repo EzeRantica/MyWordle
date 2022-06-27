@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/Laptop_Spacebar_06.wav-760a9e2b48c6341be96712af0fe0ce25.sample"
+
+[deps]
+
+source_file="res://Audio/Laptop_Spacebar_06.wav"
+dest_files=[ "res://.import/Laptop_Spacebar_06.wav-760a9e2b48c6341be96712af0fe0ce25.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0

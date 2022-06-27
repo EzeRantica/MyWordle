@@ -17,6 +17,7 @@ config/icon="res://icon.png"
 [autoload]
 
 PalabrasValidas="*res://Scripts/PalabrasValidas.gd"
+HealthManager="*res://Scenes/HealthManager.tscn"
 
 [display]
 

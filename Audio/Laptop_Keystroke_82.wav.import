@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/Laptop_Keystroke_82.wav-b62e2930c535b8c930a55461c031d895.sample"
+
+[deps]
+
+source_file="res://Audio/Laptop_Keystroke_82.wav"
+dest_files=[ "res://.import/Laptop_Keystroke_82.wav-b62e2930c535b8c930a55461c031d895.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0

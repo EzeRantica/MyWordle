@@ -37,6 +37,7 @@ var GAME_WON : bool = false
 var TEMP_WORD_ARRAY
 var palabrasFiltradas
 var arrayEstados = []
+onready var HealthTexture = $Main/HCenterContainer/VBoxContainer/HBoxContainer/HealthTexture
 
 func _ready():
 	#Creación de las filas del juego
@@ -115,9 +116,12 @@ func _ready():
 	
 	for x in LETTER_COUNT:
 		arrayEstados.append("Grey")
+	
+	
+	HealthManager.ResetHealth()
 
 func _process(_delta):
-	$Main/HCenterContainer/MarginContainer/CurrentCol.text = "COL: " + String(current_col) + "\n" + "ROW: " + String(current_row)
+	$Main/HCenterContainer/VBoxContainer/CurrentCol.text = "COL: " + String(current_col) + "\n" + "ROW: " + String(current_row)
 	FindCurrentColNode()
 
 func FindCurrentColNode():
@@ -270,6 +274,7 @@ func _input(event):
 				current_row += 1
 				if current_row == ROWS:
 					print("YOU'RE OUT OF GUESSES :(")
+					HealthManager.TakeHit()
 				#END if row == ROWS
 			#END if VerificarPalabraExistente()
 		#END if col == LETTER COUNT
