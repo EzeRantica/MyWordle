@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/mechanical_keyboard_7.wav-1492b8a4a3d30ba402b4c3fe41e79fdd.sample"
+
+[deps]
+
+source_file="res://Audio/mechanical_keyboard_7.wav"
+dest_files=[ "res://.import/mechanical_keyboard_7.wav-1492b8a4a3d30ba402b4c3fe41e79fdd.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0

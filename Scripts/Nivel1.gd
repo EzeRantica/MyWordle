@@ -39,6 +39,15 @@ var palabrasFiltradas
 var arrayEstados = []
 onready var HealthTexture = $Main/HCenterContainer/VBoxContainer/HBoxContainer/HealthTexture
 
+var arrayKeySounds = [load("res://Audio/mechanical_keyboard_1.wav"), 
+					  load("res://Audio/mechanical_keyboard_2.wav"), 
+					  load("res://Audio/mechanical_keyboard_3.wav"), 
+					  load("res://Audio/mechanical_keyboard_4.wav"), 
+					  load("res://Audio/mechanical_keyboard_5.wav"), 
+					  load("res://Audio/mechanical_keyboard_6.wav"), 
+					  load("res://Audio/mechanical_keyboard_7.wav"), 
+					  load("res://Audio/mechanical_keyboard_8.wav")]
+
 func _ready():
 	#Creación de las filas del juego
 	for i in ROWS:
@@ -119,6 +128,7 @@ func _ready():
 	
 	
 	HealthManager.ResetHealth()
+	HealthManager.connect("HealthUpdated", self, "updateHealthTexture")
 
 func _process(_delta):
 	$Main/HCenterContainer/VBoxContainer/CurrentCol.text = "COL: " + String(current_col) + "\n" + "ROW: " + String(current_row)
@@ -290,6 +300,15 @@ func _input(event):
 				current_col = 0
 			FindCurrentColNode()
 			nodoColumActual.CURRENT_LETTER = "NULL"
+		
+		var y : int = randi() % 3
+		match y:
+			0:
+				play_sound($Main/SFXPlayer_Delete, load("res://Audio/mechanical_keyboard_1.wav"))
+			1:
+				play_sound($Main/SFXPlayer_Delete, load("res://Audio/mechanical_keyboard_5.wav"))
+			2:
+				play_sound($Main/SFXPlayer_Delete, load("res://Audio/mechanical_keyboard_6.wav"))
 	
 	if current_row <= ROWS - 1 and current_col <= LETTER_COUNT - 1:# and nodoColumActual.CURRENT_LETTER == "NULL" and GAME_WON == false:
 		
@@ -403,11 +422,34 @@ func _input(event):
 		
 		if event.is_action_pressed("LetterKey"):
 			nodoColumActual.updateLetter()
+#			play_sound($Main/SFXPlayer, load("res://Audio/Laptop_Keystroke_82.wav"))
+			playRandomKeySound($Main/SFXPlayer)
 		
 		#Luego de cambiar de Columna, chequeo que no se haya pasado de INDEX
 		if current_col > LETTER_COUNT:
 			current_col = LETTER_COUNT
 
+func play_sound(player : AudioStreamPlayer, sfx : AudioStream):
+	player.stream = sfx
+	player.play()
+	
+func playRandomKeySound(player : AudioStreamPlayer):
+	var x : int = randi() % 8
+	player.stream = arrayKeySounds[x]
+	player.play()
+
+func updateHealthTexture():	
+	match HealthManager.CURRENT_HEALTH:
+		0:
+			HealthTexture.texture = load("res://UI/HealthMinus3.png")
+		1:
+			HealthTexture.texture = load("res://UI/HealthMinus2.png")
+		2:
+			HealthTexture.texture = load("res://UI/HealthMinus1.png")
+		3:
+			HealthTexture.texture = load("res://UI/HealthFull.png")
+	
+	play_sound($Main/SFXPlayer, load("res://Audio/oof.wav"))
 
 func _on_ErrorAnimationPlayer_animation_finished(anim_name):
 	if anim_name == "Error" or anim_name == "FadeOut":
