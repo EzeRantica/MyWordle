@@ -12,6 +12,7 @@ var NextLevel = preload("res://Scenes/Nivel2.tscn")
 var blankLetterContainer = preload("res://Letras/CuadroVacio_transparente.png")
 var LetterScene = preload("res://Scenes/Letter.tscn")
 var WinMessageScene = preload("res://Scenes/WinMessage.tscn")
+var teclaScene = preload("res://Scenes/Tecla.tscn")
 
 var teclas1 =  {"0": "Q", "1": "W","2": "E","3": "R","4": "T",
 				"5": "Y","6": "U","7": "I","8": "O","9": "P"}
@@ -67,11 +68,18 @@ func _ready():
 		$Main/HCenterContainer/CenterContent/RowsContainer.add_child(row, true)
 	
 	#Creación del teclado virtual
+	var tecladoContainer = VBoxContainer.new()
+	tecladoContainer.name = "TecladoContainer"
 	var teclado = VBoxContainer.new()
 	teclado.name = "Teclado"
 	teclado.alignment = BoxContainer.ALIGN_END
+	tecladoContainer.alignment = BoxContainer.ALIGN_END
+	
 	teclado.rect_min_size = Vector2($Main/HCenterContainer/CenterContent.rect_size.x , 150)
 	teclado.rect_size = Vector2($Main/HCenterContainer/CenterContent.rect_size.x, 150)
+	
+	tecladoContainer.rect_min_size = Vector2($Main/HCenterContainer/CenterContent.rect_size.x , 215)
+	tecladoContainer.rect_size = Vector2($Main/HCenterContainer/CenterContent.rect_size.x, 215)
 	for i in 3:
 		var tecladoRow = HBoxContainer.new()
 		tecladoRow.alignment = BoxContainer.ALIGN_CENTER
@@ -80,28 +88,38 @@ func _ready():
 		match i:
 			0:
 				for x in teclas1:
-					var tecla = TextureButton.new()
+					var tecla = teclaScene.instance()
 					tecla.texture_normal = load("res://Letras/tecla_" + teclas1[x] + ".png")
+					tecla.name = teclas1[x]
+					tecla.LETTER = teclas1[x]
 					tecla.expand = true
 					tecla.stretch_mode = TextureButton.STRETCH_KEEP_ASPECT
 					tecla.rect_min_size = Vector2(rowWidth / 10, rowHeight)
 					tecla.rect_size = Vector2(rowWidth / 10, rowHeight)
+					tecla.connect("teclaPressed", self, "letter_button_pressed")
+					tecla.connect("DelPressed", self, "Del_button_pressed")
+					tecla.connect("EnterPressed", self, "Enter_button_pressed")
 					tecladoRow.add_child(tecla, true)
 			1:
 				for x in teclas2:
-					var tecla = TextureButton.new()
-#					tecla.texture_normal = LETTER_TEXTURES_2[teclas2[x]][0]
+					var tecla = teclaScene.instance()
 					tecla.texture_normal = load("res://Letras/tecla_" + teclas2[x] + ".png")
+					tecla.name = teclas2[x]
+					tecla.LETTER = teclas2[x]
 					tecla.expand = true
 					tecla.stretch_mode = TextureButton.STRETCH_KEEP_ASPECT
 					tecla.rect_min_size = Vector2(rowWidth / 10, rowHeight)
 					tecla.rect_size = Vector2(rowWidth / 10, rowHeight)
+					tecla.connect("teclaPressed", self, "letter_button_pressed")
+					tecla.connect("DelPressed", self, "Del_button_pressed")
+					tecla.connect("EnterPressed", self, "Enter_button_pressed")
 					tecladoRow.add_child(tecla, true)
 			2:
 				for x in teclas3:
-					var tecla = TextureButton.new()
-#					tecla.texture_normal = LETTER_TEXTURES_3[teclas3[x]][0]
+					var tecla = teclaScene.instance()
 					tecla.texture_normal = load("res://Letras/tecla_" + teclas3[x] + ".png")
+					tecla.name = teclas3[x]
+					tecla.LETTER = teclas3[x]
 					tecla.expand = true
 					tecla.stretch_mode = TextureButton.STRETCH_KEEP_ASPECT
 					if teclas3[x] == "Enter" or teclas3[x] == "Del":
@@ -110,9 +128,14 @@ func _ready():
 					else:
 						tecla.rect_min_size = Vector2(rowWidth / 9.7, rowHeight)
 						tecla.rect_size = Vector2(rowWidth / 9.7, rowHeight)
+					tecla.connect("teclaPressed", self, "letter_button_pressed")
+					tecla.connect("DelPressed", self, "Del_button_pressed")
+					tecla.connect("EnterPressed", self, "Enter_button_pressed")
 					tecladoRow.add_child(tecla, true)
+			
 		teclado.add_child(tecladoRow, true)
-	$Main/HCenterContainer/CenterContent.add_child(teclado)
+	tecladoContainer.add_child(teclado, true)
+	$Main/HCenterContainer/CenterContent.add_child(tecladoContainer)
 	
 	#Antes de terminar el setup, busco el nodo de la fila y columna actual
 	FindCurrentColNode()
@@ -211,8 +234,6 @@ func CalcularEstados(palabra):
 		
 		LetraIndex += 1
 	#END for NODO IN FILA ACTUAL
-	
-	print(arrayEstados)
 #END funcion
 
 func ShowWinMessage():
@@ -274,7 +295,6 @@ func _input(event):
 				#END for letras in filaActual
 				
 				if submitedWord == CURRENT_WORD:
-					print("YOU WIN!!!!")
 					GAME_WON = true
 					ShowWinMessage()
 					return
@@ -310,115 +330,88 @@ func _input(event):
 			2:
 				play_sound($Main/SFXPlayer_Delete, load("res://Audio/mechanical_keyboard_6.wav"))
 	
-	if current_row <= ROWS - 1 and current_col <= LETTER_COUNT - 1:# and nodoColumActual.CURRENT_LETTER == "NULL" and GAME_WON == false:
-		
+	
+	if current_row <= ROWS - 1 and current_col <= LETTER_COUNT - 1:
 		if event.is_action_pressed("A"):
-			current_col += 1
-			nodoColumActual.CURRENT_LETTER = "A"
+			TypeLetter("A", nodoColumActual)
 		
 		if event.is_action_pressed("B"):
-			current_col += 1
-			nodoColumActual.CURRENT_LETTER = "B"
+			TypeLetter("B", nodoColumActual)
 		
 		if event.is_action_pressed("C"):
-			current_col += 1
-			nodoColumActual.CURRENT_LETTER = "C"
+			TypeLetter("C", nodoColumActual)
 		
 		if event.is_action_pressed("D"):
-			current_col += 1
-			nodoColumActual.CURRENT_LETTER = "D"
+			TypeLetter("D", nodoColumActual)
 		
 		if event.is_action_pressed("E"):
-			current_col += 1
-			nodoColumActual.CURRENT_LETTER = "E"
+			TypeLetter("E", nodoColumActual)
 		
 		if event.is_action_pressed("F"):
-			current_col += 1
-			nodoColumActual.CURRENT_LETTER = "F"
+			TypeLetter("F", nodoColumActual)
 		
 		if event.is_action_pressed("G"):
-			current_col += 1
-			nodoColumActual.CURRENT_LETTER = "G"
+			TypeLetter("G", nodoColumActual)
 		
 		if event.is_action_pressed("H"):
-			current_col += 1
-			nodoColumActual.CURRENT_LETTER = "H"
+			TypeLetter("H", nodoColumActual)
 		
 		if event.is_action_pressed("I"):
-			current_col += 1
-			nodoColumActual.CURRENT_LETTER = "I"
+			TypeLetter("I", nodoColumActual)
 		
 		if event.is_action_pressed("J"):
-			current_col += 1
-			nodoColumActual.CURRENT_LETTER = "J"
+			TypeLetter("J", nodoColumActual)
 		
 		if event.is_action_pressed("K"):
-			current_col += 1
-			nodoColumActual.CURRENT_LETTER = "K"
+			TypeLetter("K", nodoColumActual)
 		
 		if event.is_action_pressed("L"):
-			current_col += 1
-			nodoColumActual.CURRENT_LETTER = "L"
+			TypeLetter("L", nodoColumActual)
 		
 		if event.is_action_pressed("M"):
-			current_col += 1
-			nodoColumActual.CURRENT_LETTER = "M"
+			TypeLetter("M", nodoColumActual)
 		
 		if event.is_action_pressed("N"):
-			current_col += 1
-			nodoColumActual.CURRENT_LETTER = "N"
+			TypeLetter("N", nodoColumActual)
 		
 		if event.is_action_pressed("Ñ"):
-			current_col += 1
-			nodoColumActual.CURRENT_LETTER = "Ñ"
+			TypeLetter("Ñ", nodoColumActual)
 		
 		if event.is_action_pressed("O"):
-			current_col += 1
-			nodoColumActual.CURRENT_LETTER = "O"
+			TypeLetter("O", nodoColumActual)
 		
 		if event.is_action_pressed("P"):
-			current_col += 1
-			nodoColumActual.CURRENT_LETTER = "P"
+			TypeLetter("P", nodoColumActual)
 		
 		if event.is_action_pressed("Q"):
-			current_col += 1
-			nodoColumActual.CURRENT_LETTER = "Q"
+			TypeLetter("Q", nodoColumActual)
 		
 		if event.is_action_pressed("R"):
-			current_col += 1
-			nodoColumActual.CURRENT_LETTER = "R"
+			TypeLetter("R", nodoColumActual)
 		
 		if event.is_action_pressed("S"):
-			current_col += 1
-			nodoColumActual.CURRENT_LETTER = "S"
+			TypeLetter("S", nodoColumActual)
 		
 		if event.is_action_pressed("T"):
-			current_col += 1
-			nodoColumActual.CURRENT_LETTER = "T"
+			TypeLetter("T", nodoColumActual)
 		
 		if event.is_action_pressed("U"):
-			current_col += 1
-			nodoColumActual.CURRENT_LETTER = "U"
+			TypeLetter("U", nodoColumActual)
 		
 		if event.is_action_pressed("V"):
-			current_col += 1
-			nodoColumActual.CURRENT_LETTER = "V"
+			TypeLetter("V", nodoColumActual)
 		
 		if event.is_action_pressed("W"):
-			current_col += 1
-			nodoColumActual.CURRENT_LETTER = "W"
+			TypeLetter("W", nodoColumActual)
 		
 		if event.is_action_pressed("X"):
-			current_col += 1
-			nodoColumActual.CURRENT_LETTER = "X"
+			TypeLetter("X", nodoColumActual)
 		
 		if event.is_action_pressed("Y"):
-			current_col += 1
-			nodoColumActual.CURRENT_LETTER = "Y"
+			TypeLetter("Y", nodoColumActual)
 		
 		if event.is_action_pressed("Z"):
-			current_col += 1
-			nodoColumActual.CURRENT_LETTER = "Z"
+			TypeLetter("Z", nodoColumActual)
 		
 		if event.is_action_pressed("LetterKey"):
 			nodoColumActual.updateLetter()
@@ -429,14 +422,100 @@ func _input(event):
 		if current_col > LETTER_COUNT:
 			current_col = LETTER_COUNT
 
+func TypeLetter(letter : String, node):
+	current_col += 1
+	node.CURRENT_LETTER = letter
+
+
+func letter_button_pressed(letter):
+	if letter != "Del" and letter != "Enter":
+		TypeLetter(letter, nodoColumActual)
+		playRandomKeySound($Main/SFXPlayer)
+
+func Del_button_pressed():
+	if GAME_WON:
+		return
+	
+	if current_row <= ROWS - 1:
+		current_col -= 1
+		if current_col < 0:
+			current_col = 0
+		FindCurrentColNode()
+		nodoColumActual.CURRENT_LETTER = "NULL"
+		
+		var y : int = randi() % 3
+		match y:
+			0:
+				play_sound($Main/SFXPlayer_Delete, load("res://Audio/mechanical_keyboard_1.wav"))
+			1:
+				play_sound($Main/SFXPlayer_Delete, load("res://Audio/mechanical_keyboard_5.wav"))
+			2:
+				play_sound($Main/SFXPlayer_Delete, load("res://Audio/mechanical_keyboard_6.wav"))
+
+
+func Enter_button_pressed():
+	if GAME_WON:
+		return
+		
+	if current_col == LETTER_COUNT:
+		#SE COMPARAN BUSCA LA PALABRA EN LA LISTA DE PALABRAS VÁLIDAS
+		var submitedWord = ""
+		
+		for letterIndex in LETTER_COUNT:
+			var letterNode = FindColumNode(letterIndex)
+			var character = letterNode.CURRENT_LETTER
+			submitedWord += String(character)
+		#END for LETTER COUNT
+		
+		if VerificarPalabraExistente(submitedWord): #SI LA PALABRA NO ESTÁ EN LA LISTA DE EXISTENTES NO SE SIGUE
+			#VERIFICAR ESTADOS DE TODAS LAS LETRAS
+			#PRIMERO RESETEO EL ARRAY PARA QUE TODAS QUEDEN GRISES
+			arrayEstados = []
+			for x in LETTER_COUNT:
+				arrayEstados.append("Grey")
+				
+			#SEGUNDO RECALCULO LOS ESTADOS
+			TEMP_WORD_ARRAY = CURRENT_WORD_ARRAY.duplicate()
+			CalcularEstados(TEMP_WORD_ARRAY)
+			
+			#BUSCAR NODOS DE FILAS Y LETRAS
+			var filas = $Main/HCenterContainer/CenterContent/RowsContainer.get_children()
+			var filaActual = filas[current_row].get_children()
+			
+			#POR CADA LETRA, LE APLICO EL ESTADO CORRESPONDIENTE A SU POSICION Y LA ACTUALIZO
+			var x = 0
+			for letraActual in filaActual:
+				letraActual.CURRENT_STATE = arrayEstados[x]
+				letraActual.flipLetter()
+				yield(get_tree().create_timer(0.2), "timeout")
+				x += 1
+			#END for letras in filaActual
+			
+			if submitedWord == CURRENT_WORD:
+				GAME_WON = true
+				ShowWinMessage()
+				return
+			
+			#AL FINAL - CAMBIAR DE FILA
+			current_col = 0
+			current_row += 1
+			if current_row == ROWS:
+				print("YOU'RE OUT OF GUESSES :(")
+				HealthManager.TakeHit()
+			#END if row == ROWS
+		#END if VerificarPalabraExistente()
+	#END if col == LETTER COUNT
+
 func play_sound(player : AudioStreamPlayer, sfx : AudioStream):
 	player.stream = sfx
 	player.play()
-	
+
+
 func playRandomKeySound(player : AudioStreamPlayer):
 	var x : int = randi() % 8
 	player.stream = arrayKeySounds[x]
 	player.play()
+
 
 func updateHealthTexture():	
 	match HealthManager.CURRENT_HEALTH:
@@ -450,6 +529,7 @@ func updateHealthTexture():
 			HealthTexture.texture = load("res://UI/HealthFull.png")
 	
 	play_sound($Main/SFXPlayer, load("res://Audio/oof.wav"))
+
 
 func _on_ErrorAnimationPlayer_animation_finished(anim_name):
 	if anim_name == "Error" or anim_name == "FadeOut":
