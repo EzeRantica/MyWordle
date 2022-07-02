@@ -89,9 +89,10 @@ func _ready():
 			0:
 				for x in teclas1:
 					var tecla = teclaScene.instance()
-					tecla.texture_normal = load("res://Letras/tecla_" + teclas1[x] + ".png")
+#					tecla.texture_normal = load("res://Letras/tecla_" + teclas1[x] + ".png")
+					tecla.texture_normal = load("res://Letras/blank_letter_box.png")
 					tecla.name = teclas1[x]
-					tecla.LETTER = teclas1[x]
+					tecla.SetLetter(teclas1[x])
 					tecla.expand = true
 					tecla.stretch_mode = TextureButton.STRETCH_KEEP_ASPECT
 					tecla.rect_min_size = Vector2(rowWidth / 10, rowHeight)
@@ -103,9 +104,10 @@ func _ready():
 			1:
 				for x in teclas2:
 					var tecla = teclaScene.instance()
-					tecla.texture_normal = load("res://Letras/tecla_" + teclas2[x] + ".png")
+#					tecla.texture_normal = load("res://Letras/tecla_" + teclas2[x] + ".png")
+					tecla.texture_normal = load("res://Letras/blank_letter_box.png")
 					tecla.name = teclas2[x]
-					tecla.LETTER = teclas2[x]
+					tecla.SetLetter(teclas2[x])
 					tecla.expand = true
 					tecla.stretch_mode = TextureButton.STRETCH_KEEP_ASPECT
 					tecla.rect_min_size = Vector2(rowWidth / 10, rowHeight)
@@ -117,9 +119,10 @@ func _ready():
 			2:
 				for x in teclas3:
 					var tecla = teclaScene.instance()
-					tecla.texture_normal = load("res://Letras/tecla_" + teclas3[x] + ".png")
+#					tecla.texture_normal = load("res://Letras/tecla_" + teclas3[x] + ".png")
+					tecla.texture_normal = load("res://Letras/blank_letter_box.png")
 					tecla.name = teclas3[x]
-					tecla.LETTER = teclas3[x]
+					tecla.SetLetter(teclas3[x])
 					tecla.expand = true
 					tecla.stretch_mode = TextureButton.STRETCH_KEEP_ASPECT
 					if teclas3[x] == "Enter" or teclas3[x] == "Del":
@@ -138,7 +141,7 @@ func _ready():
 	$Main/HCenterContainer/CenterContent.add_child(tecladoContainer)
 	
 	#Antes de terminar el setup, busco el nodo de la fila y columna actual
-	FindCurrentColNode()
+#	FindCurrentColNode()
 	
 	#PALABRAS FILTRADAAAAAAAAAAAAAAHHHHHH!
 	palabrasFiltradas = []
@@ -318,7 +321,7 @@ func _input(event):
 			current_col -= 1
 			if current_col < 0:
 				current_col = 0
-			FindCurrentColNode()
+#			FindCurrentColNode()
 			nodoColumActual.CURRENT_LETTER = "NULL"
 		
 		var y : int = randi() % 3
@@ -424,6 +427,8 @@ func _input(event):
 
 func TypeLetter(letter : String, node):
 	current_col += 1
+	if current_col > LETTER_COUNT:
+		current_col = LETTER_COUNT
 	node.CURRENT_LETTER = letter
 
 
