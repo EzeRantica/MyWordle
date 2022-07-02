@@ -190,6 +190,10 @@ func VerificarPalabraExistente(word) -> bool:
 		if item.length() == LETTER_COUNT:
 			if item.to_upper().match(word.to_upper()):
 				return true
+			elif item.to_upper().substr(item.length() - 2, 1) == "A" or item.to_upper().substr(item.length() - 2, 1) == "E" or item.to_upper().substr(item.length() - 2, 1) == "I" or item.to_upper().substr(item.length() - 2, 1) == "O" or item.to_upper().substr(item.length() - 2, 1) == "U":
+				var itemS = item.to_upper() + "S"
+				if itemS.to_upper().match(word.to_upper()):
+					return true
 			#END if item match word
 		#END if item.length()
 	#END for palabrasFiltradas
@@ -316,22 +320,22 @@ func _input(event):
 	if event.is_action_pressed("DELETE"):
 		if GAME_WON:
 			return
-			
+		
 		if current_row <= ROWS - 1:
 			current_col -= 1
 			if current_col < 0:
 				current_col = 0
-#			FindCurrentColNode()
+			FindCurrentColNode()
 			nodoColumActual.CURRENT_LETTER = "NULL"
-		
-		var y : int = randi() % 3
-		match y:
-			0:
-				play_sound($Main/SFXPlayer_Delete, load("res://Audio/mechanical_keyboard_1.wav"))
-			1:
-				play_sound($Main/SFXPlayer_Delete, load("res://Audio/mechanical_keyboard_5.wav"))
-			2:
-				play_sound($Main/SFXPlayer_Delete, load("res://Audio/mechanical_keyboard_6.wav"))
+			
+			var y : int = randi() % 3
+			match y:
+				0:
+					play_sound($Main/SFXPlayer_Delete, load("res://Audio/mechanical_keyboard_1.wav"))
+				1:
+					play_sound($Main/SFXPlayer_Delete, load("res://Audio/mechanical_keyboard_5.wav"))
+				2:
+					play_sound($Main/SFXPlayer_Delete, load("res://Audio/mechanical_keyboard_6.wav"))
 	
 	
 	if current_row <= ROWS - 1 and current_col <= LETTER_COUNT - 1:
