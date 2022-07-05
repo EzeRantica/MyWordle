@@ -9,3 +9,6 @@ data_*/
 
 # custom engine ignores
 project.user.godot
+
+Buborle.exe
+*.exe

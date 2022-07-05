@@ -146,7 +146,7 @@ func _ready():
 	#PALABRAS FILTRADAAAAAAAAAAAAAAHHHHHH!
 	palabrasFiltradas = []
 	for x in PalabrasValidas.Palabras:
-		if x.length() == LETTER_COUNT:
+		if x.length() == LETTER_COUNT or x.length() == LETTER_COUNT - 1:
 			palabrasFiltradas.append(x)
 	
 	for x in LETTER_COUNT:
@@ -190,14 +190,26 @@ func VerificarPalabraExistente(word) -> bool:
 		if item.length() == LETTER_COUNT:
 			if item.to_upper().match(word.to_upper()):
 				return true
-			elif item.to_upper().substr(item.length() - 2, 1) == "A" or item.to_upper().substr(item.length() - 2, 1) == "E" or item.to_upper().substr(item.length() - 2, 1) == "I" or item.to_upper().substr(item.length() - 2, 1) == "O" or item.to_upper().substr(item.length() - 2, 1) == "U":
-				var itemS = item.to_upper() + "S"
-				if itemS.to_upper().match(word.to_upper()):
-					return true
+			else:
+				if item.to_upper().substr(item.length() - 1, 1) == "A" or item.to_upper().substr(item.length() - 1, 1) == "E" or item.to_upper().substr(item.length() - 1, 1) == "I" or item.to_upper().substr(item.length() - 1, 1) == "O" or item.to_upper().substr(item.length() - 1, 1) == "U":
+					var itemS = item.to_upper() + "S"
+					if itemS.to_upper().match(word.to_upper()):
+						return true
 			#END if item match word
 		#END if item.length()
 	#END for palabrasFiltradas
 	
+	for item in palabrasFiltradas:
+		#Termina con VOCAL
+		if item.to_upper().substr(item.length() - 1, 1) == "A" or item.to_upper().substr(item.length() - 1, 1) == "E" or item.to_upper().substr(item.length() - 1, 1) == "I" or item.to_upper().substr(item.length() - 1, 1) == "O" or item.to_upper().substr(item.length() - 1, 1) == "U":
+			if item.length() == LETTER_COUNT - 1:
+				var itemS = item.to_upper() + "S"
+				if itemS.to_upper().match(word.to_upper()):
+					return true
+		else: #No termina con VOCAL
+			if item.length() == LETTER_COUNT:
+				if item.to_upper().match(word.to_upper()):
+					return true
 	if !isErrorActive:
 		$Main/HCenterContainer/HBoxContainer/ErrorAnimationPlayer.play("Error")
 		isErrorActive = true
