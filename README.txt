@@ -4,4 +4,3 @@ TO DO:
 3. Sistema de reinicio de nivel.
 4. Ir al menú principal al quedarse sin vidas.
 5. Hacer Menú Principal.
-6. Actualizar color del teclado virtual según las letras adivinadas.

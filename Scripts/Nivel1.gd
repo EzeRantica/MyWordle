@@ -20,6 +20,9 @@ var teclas2 =  {"0": "A","1": "S","2": "D","3": "F","4": "G",
 				"5": "H","6": "J","7": "K","8": "L","9": "Ñ"}
 var teclas3 =  {"0": "Enter","1": "Z","2": "X","3": "C","4": "V",
 				"5": "B","6": "N","7": "M","8": "Del"}
+var row1
+var row2
+var row3
 
 
 #$$$$$$$$ VARIABLES DE POSICION DEL "CURSOR" (EN QUE CUADRADO SE ESTÁ ACTUALMENTE) $$$$$$$$$$$$$$$$$
@@ -101,6 +104,7 @@ func _ready():
 					tecla.connect("DelPressed", self, "Del_button_pressed")
 					tecla.connect("EnterPressed", self, "Enter_button_pressed")
 					tecladoRow.add_child(tecla, true)
+					row1 = tecladoRow
 			1:
 				for x in teclas2:
 					var tecla = teclaScene.instance()
@@ -116,6 +120,7 @@ func _ready():
 					tecla.connect("DelPressed", self, "Del_button_pressed")
 					tecla.connect("EnterPressed", self, "Enter_button_pressed")
 					tecladoRow.add_child(tecla, true)
+					row2 = tecladoRow
 			2:
 				for x in teclas3:
 					var tecla = teclaScene.instance()
@@ -135,6 +140,7 @@ func _ready():
 					tecla.connect("DelPressed", self, "Del_button_pressed")
 					tecla.connect("EnterPressed", self, "Enter_button_pressed")
 					tecladoRow.add_child(tecla, true)
+					row3 = tecladoRow
 			
 		teclado.add_child(tecladoRow, true)
 	tecladoContainer.add_child(teclado, true)
@@ -154,7 +160,7 @@ func _ready():
 	
 	
 	HealthManager.ResetHealth()
-	HealthManager.connect("HealthUpdated", self, "updateHealthTexture")
+	var _conn = HealthManager.connect("HealthUpdated", self, "updateHealthTexture")
 
 func _process(_delta):
 	$Main/HCenterContainer/VBoxContainer/CurrentCol.text = "COL: " + String(current_col) + "\n" + "ROW: " + String(current_row)
@@ -269,6 +275,21 @@ func ShowWinMessage():
 	get_tree().paused = true
 
 
+func SetEstadoTecla(colorEstado, letraTecla):
+	match letraTecla:
+		"Q", "W", "E", "R", "T", "Y", "U", "I", "O", "P":
+			var teclaSel = row1.get_node(String(letraTecla))
+			if teclaSel.has_method("SetColor") and teclaSel.CURRENT_STATE == "Blank":
+				teclaSel.SetColor(colorEstado)
+		"A", "S", "D", "F", "G", "H", "J", "K", "L", "Ñ":
+			var teclaSel = row2.get_node(String(letraTecla))
+			if teclaSel.has_method("SetColor") and teclaSel.CURRENT_STATE == "Blank":
+				teclaSel.SetColor(colorEstado)
+		"Z", "X", "C", "V", "B", "N", "M":
+			var teclaSel = row3.get_node(String(letraTecla))
+			if teclaSel.has_method("SetColor") and teclaSel.CURRENT_STATE == "Blank":
+				teclaSel.SetColor(colorEstado)
+
 # ........................................ INPUTS ..... ...........................................................#
 # INPUTS INPUTS INPUTS INPUTS INPUTS INPUTS INPUTS INPUTS INPUTS INPUTS INPUTS INPUTS INPUTS INPUTS INPUTS INPUTS  #
 #..................................................................................................................#
@@ -310,7 +331,9 @@ func _input(event):
 					letraActual.CURRENT_STATE = arrayEstados[x]
 					letraActual.flipLetter()
 					yield(get_tree().create_timer(0.2), "timeout")
+					SetEstadoTecla(arrayEstados[x], letraActual.CURRENT_LETTER)
 					x += 1
+					
 				#END for letras in filaActual
 				
 				if submitedWord == CURRENT_WORD:
