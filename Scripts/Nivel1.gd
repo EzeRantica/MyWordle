@@ -279,16 +279,38 @@ func SetEstadoTecla(colorEstado, letraTecla):
 	match letraTecla:
 		"Q", "W", "E", "R", "T", "Y", "U", "I", "O", "P":
 			var teclaSel = row1.get_node(String(letraTecla))
-			if teclaSel.has_method("SetColor") and teclaSel.CURRENT_STATE == "Blank":
+			if teclaSel.has_method("SetColor") and ValidarCambio(teclaSel, colorEstado):
 				teclaSel.SetColor(colorEstado)
 		"A", "S", "D", "F", "G", "H", "J", "K", "L", "Ñ":
 			var teclaSel = row2.get_node(String(letraTecla))
-			if teclaSel.has_method("SetColor") and teclaSel.CURRENT_STATE == "Blank":
+			if teclaSel.has_method("SetColor") and ValidarCambio(teclaSel, colorEstado):
 				teclaSel.SetColor(colorEstado)
 		"Z", "X", "C", "V", "B", "N", "M":
 			var teclaSel = row3.get_node(String(letraTecla))
-			if teclaSel.has_method("SetColor") and teclaSel.CURRENT_STATE == "Blank":
+			if teclaSel.has_method("SetColor") and ValidarCambio(teclaSel, colorEstado):
 				teclaSel.SetColor(colorEstado)
+
+
+func ValidarCambio(nodoTecla, colorEstado) -> bool:
+	var boolResultado : bool = false
+	
+	match colorEstado:
+		"Blank":
+			boolResultado = true
+		"Grey":
+			if nodoTecla.CURRENT_STATE == "Blank":
+				boolResultado = true
+		"Yellow":
+			if nodoTecla.CURRENT_STATE == "Blank" or nodoTecla.CURRENT_STATE == "Grey":
+				boolResultado = true
+		"Green":
+			if nodoTecla.CURRENT_STATE == "Blank" or nodoTecla.CURRENT_STATE == "Grey" or nodoTecla.CURRENT_STATE == "Yellow":
+				boolResultado = true
+	
+	return boolResultado
+
+
+
 
 # ........................................ INPUTS ..... ...........................................................#
 # INPUTS INPUTS INPUTS INPUTS INPUTS INPUTS INPUTS INPUTS INPUTS INPUTS INPUTS INPUTS INPUTS INPUTS INPUTS INPUTS  #

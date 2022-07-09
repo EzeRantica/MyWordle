@@ -1,21 +1,24 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=15 format=2]
 
 [ext_resource path="res://Fonts/HelveticaNeueBold.ttf" type="DynamicFontData" id=1]
 [ext_resource path="res://Letras/Worlde_Title.png" type="Texture" id=2]
 [ext_resource path="res://Letras/White_texture.png" type="Texture" id=3]
 [ext_resource path="res://Scripts/Nivel3.gd" type="Script" id=4]
+[ext_resource path="res://UI/HealthFull.png" type="Texture" id=5]
+[ext_resource path="res://UI/Rules.png" type="Texture" id=6]
+[ext_resource path="res://Audio/Laptop_Keystroke_82.wav" type="AudioStream" id=7]
 
-[sub_resource type="DynamicFont" id=2]
+[sub_resource type="DynamicFont" id=8]
 size = 18
 outline_size = 1
 outline_color = Color( 0.803922, 0.803922, 0.803922, 1 )
 use_filter = true
 font_data = ExtResource( 1 )
 
-[sub_resource type="Theme" id=3]
-default_font = SubResource( 2 )
+[sub_resource type="Theme" id=9]
+default_font = SubResource( 8 )
 
-[sub_resource type="Animation" id=4]
+[sub_resource type="Animation" id=10]
 resource_name = "ERRORR"
 tracks/0/type = "value"
 tracks/0/path = NodePath("ErrorMessage:self_modulate")
@@ -42,7 +45,7 @@ tracks/1/keys = {
 "values": [ 0.0, -5.0, 5.0, -5.0, 5.0, -5.0, 5.0, -5.0, 5.0, -5.0, 0.0 ]
 }
 
-[sub_resource type="Animation" id=5]
+[sub_resource type="Animation" id=11]
 resource_name = "Error"
 length = 2.0
 step = 0.01
@@ -59,7 +62,7 @@ tracks/0/keys = {
 "values": [ Color( 0.964706, 0.188235, 0.188235, 0 ), Color( 0.964706, 0.188235, 0.188235, 1 ), Color( 0.964706, 0.188235, 0.188235, 1 ), Color( 0.964706, 0.188235, 0.188235, 0 ) ]
 }
 
-[sub_resource type="Animation" id=6]
+[sub_resource type="Animation" id=12]
 resource_name = "FadeOut"
 length = 0.5
 tracks/0/type = "value"
@@ -75,7 +78,7 @@ tracks/0/keys = {
 "values": [ Color( 0.964706, 0.188235, 0.188235, 1 ), Color( 0.964706, 0.188235, 0.188235, 0 ) ]
 }
 
-[sub_resource type="Animation" id=7]
+[sub_resource type="Animation" id=13]
 resource_name = "IDLE"
 tracks/0/type = "value"
 tracks/0/path = NodePath("ErrorMessage:self_modulate")
@@ -90,7 +93,7 @@ tracks/0/keys = {
 "values": [ Color( 0.964706, 0.188235, 0.188235, 0 ) ]
 }
 
-[sub_resource type="Animation" id=8]
+[sub_resource type="Animation" id=14]
 length = 0.001
 tracks/0/type = "value"
 tracks/0/path = NodePath("ErrorMessage:self_modulate")
@@ -111,16 +114,16 @@ script = ExtResource( 4 )
 [node name="Main" type="Control" parent="."]
 margin_right = 1280.0
 margin_bottom = 720.0
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="TextureRect" type="TextureRect" parent="Main"]
-self_modulate = Color( 0.882353, 0.882353, 0.882353, 1 )
+self_modulate = Color( 0.929412, 0.929412, 0.929412, 1 )
 anchor_right = 1.0
 anchor_bottom = 1.0
 texture = ExtResource( 3 )
 stretch_mode = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="HCenterContainer" type="HBoxContainer" parent="Main"]
 anchor_right = 1.0
@@ -129,32 +132,58 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="MarginContainer" type="MarginContainer" parent="Main/HCenterContainer"]
-margin_right = 426.6
+[node name="VBoxContainer" type="VBoxContainer" parent="Main/HCenterContainer"]
+margin_right = 400.0
 margin_bottom = 720.0
-rect_min_size = Vector2( 426.6, 0 )
+rect_min_size = Vector2( 400, 0 )
 
-[node name="CurrentCol" type="RichTextLabel" parent="Main/HCenterContainer/MarginContainer"]
+[node name="CurrentCol" type="RichTextLabel" parent="Main/HCenterContainer/VBoxContainer"]
 self_modulate = Color( 0, 0, 0, 1 )
-margin_right = 426.0
-margin_bottom = 720.0
+margin_right = 400.0
+margin_bottom = 30.0
+rect_min_size = Vector2( 0, 30 )
 text = "0"
 
+[node name="MarginContainer" type="MarginContainer" parent="Main/HCenterContainer/VBoxContainer"]
+margin_top = 34.0
+margin_right = 400.0
+margin_bottom = 84.0
+rect_min_size = Vector2( 0, 50 )
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Main/HCenterContainer/VBoxContainer"]
+margin_top = 88.0
+margin_right = 400.0
+margin_bottom = 128.0
+
+[node name="MarginContainer" type="MarginContainer" parent="Main/HCenterContainer/VBoxContainer/HBoxContainer"]
+margin_right = 30.0
+margin_bottom = 40.0
+rect_min_size = Vector2( 30, 10 )
+
+[node name="HealthTexture" type="TextureRect" parent="Main/HCenterContainer/VBoxContainer/HBoxContainer" groups=["healthTexture"]]
+margin_left = 34.0
+margin_right = 134.0
+margin_bottom = 40.0
+rect_min_size = Vector2( 100, 40 )
+texture = ExtResource( 5 )
+expand = true
+stretch_mode = 6
+
 [node name="CenterContent" type="VBoxContainer" parent="Main/HCenterContainer"]
-margin_left = 430.0
-margin_right = 856.6
+margin_left = 404.0
+margin_right = 854.0
 margin_bottom = 720.0
-rect_min_size = Vector2( 426.6, 0 )
+rect_min_size = Vector2( 450, 0 )
 
 [node name="TitleContainer" type="HBoxContainer" parent="Main/HCenterContainer/CenterContent"]
-margin_right = 426.0
+margin_right = 450.0
 margin_bottom = 70.0
 rect_min_size = Vector2( 0, 70 )
 alignment = 1
 
 [node name="TitleTexture" type="TextureRect" parent="Main/HCenterContainer/CenterContent/TitleContainer"]
-margin_left = 63.0
-margin_right = 363.0
+margin_left = 75.0
+margin_right = 375.0
 margin_bottom = 70.0
 rect_min_size = Vector2( 300, 70 )
 texture = ExtResource( 2 )
@@ -163,13 +192,13 @@ stretch_mode = 7
 
 [node name="RowsContainer" type="VBoxContainer" parent="Main/HCenterContainer/CenterContent"]
 margin_top = 74.0
-margin_right = 426.0
-margin_bottom = 504.0
-rect_min_size = Vector2( 0, 430 )
+margin_right = 450.0
+margin_bottom = 474.0
+rect_min_size = Vector2( 0, 400 )
 
 [node name="HBoxContainer" type="VBoxContainer" parent="Main/HCenterContainer"]
-margin_left = 860.0
-margin_right = 1280.0
+margin_left = 858.0
+margin_right = 1278.0
 margin_bottom = 720.0
 
 [node name="MarginContainer" type="MarginContainer" parent="Main/HCenterContainer/HBoxContainer"]
@@ -182,15 +211,39 @@ self_modulate = Color( 0.964706, 0.188235, 0.188235, 0 )
 margin_top = 84.0
 margin_right = 420.0
 margin_bottom = 106.0
-theme = SubResource( 3 )
+theme = SubResource( 9 )
 text = "LA PALABRA NO ESTÁ EN LA LISTA!"
+
+[node name="MarginContainer2" type="MarginContainer" parent="Main/HCenterContainer/HBoxContainer"]
+margin_top = 110.0
+margin_right = 420.0
+margin_bottom = 150.0
+rect_min_size = Vector2( 420, 40 )
+
+[node name="TextureRect" type="TextureRect" parent="Main/HCenterContainer/HBoxContainer"]
+margin_top = 154.0
+margin_right = 420.0
+margin_bottom = 604.0
+rect_min_size = Vector2( 0, 450 )
+texture = ExtResource( 6 )
+expand = true
+stretch_mode = 6
 
 [node name="ErrorAnimationPlayer" type="AnimationPlayer" parent="Main/HCenterContainer/HBoxContainer"]
 autoplay = "IDLE"
-anims/ERRORR = SubResource( 4 )
-anims/Error = SubResource( 5 )
-anims/FadeOut = SubResource( 6 )
-anims/IDLE = SubResource( 7 )
-anims/RESET = SubResource( 8 )
+anims/ERRORR = SubResource( 10 )
+anims/Error = SubResource( 11 )
+anims/FadeOut = SubResource( 12 )
+anims/IDLE = SubResource( 13 )
+anims/RESET = SubResource( 14 )
+
+[node name="MusicPlayer" type="AudioStreamPlayer" parent="Main"]
+
+[node name="SFXPlayer" type="AudioStreamPlayer" parent="Main"]
+stream = ExtResource( 7 )
+bus = "Sounds"
+
+[node name="SFXPlayer_Delete" type="AudioStreamPlayer" parent="Main"]
+bus = "Sounds_2"
 
 [connection signal="animation_finished" from="Main/HCenterContainer/HBoxContainer/ErrorAnimationPlayer" to="." method="_on_ErrorAnimationPlayer_animation_finished"]
