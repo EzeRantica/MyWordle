@@ -11,20 +11,6 @@ func _process(_delta):
 		$TextNode.text = ""
 	else:
 		$TextNode.text = String(CURRENT_LETTER)
-	
-#	if Input.is_action_just_pressed("ENTER"):
-#		flipLetter()
-	
-#	match CURRENT_STATE:
-#		"White":
-#			$BackgroundNode.texture = load("res://Letras/cuadro_fondo_transparente.png")
-#		"Grey":
-#			$BackgroundNode.texture = load("res://Letras/cuadro_fondo_gris.png")
-#		"Yellow":
-#			$BackgroundNode.texture = load("res://Letras/cuadro_fondo_amarillo.png")
-#		"Green":
-#			$BackgroundNode.texture = load("res://Letras/cuadro_fondo_verde.png")
-	
 
 func SetSize(size):
 	var value = size / 80

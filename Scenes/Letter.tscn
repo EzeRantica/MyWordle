@@ -243,7 +243,6 @@ margin_right = 66.0
 margin_bottom = 66.0
 rect_min_size = Vector2( 66, 66 )
 theme = SubResource( 10 )
-text = "M"
 align = 1
 valign = 1
 uppercase = true

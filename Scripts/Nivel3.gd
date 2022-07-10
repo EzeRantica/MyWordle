@@ -2,9 +2,9 @@ extends Node2D
 
 ## VALORES A CAMBIAR POR CADA NIVEL ################################################################
 export(String) var CURRENT_WORD = "BUBOS"
-const CURRENT_WORD_ARRAY = {"B": 2, "U": 1, "O": 1, "S": 1}
-const CURRENT_WORD_POSITIONS = {"0": "B", "1": "U", "2": "B", "3": "O", "4": "S"}
-export(int) var LETTER_COUNT = 5 #COMENZANDO DESDE EL 1
+var CURRENT_WORD_ARRAY = {}
+var CURRENT_WORD_POSITIONS = {}
+var LETTER_COUNT : int
 export(int) var ROWS = 6
 var NextLevel = preload("res://Scenes/Main.tscn")
 ####################################################################################################
@@ -33,8 +33,8 @@ var nodoColumActual
 #$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
 
 
-var boxWidth = 640 / LETTER_COUNT
-var boxHeight = boxWidth
+var boxWidth 
+var boxHeight
 var tempWordArray
 var isErrorActive : bool = false
 var GAME_WON : bool = false
@@ -52,7 +52,26 @@ var arrayKeySounds = [load("res://Audio/mechanical_keyboard_1.wav"),
 					  load("res://Audio/mechanical_keyboard_7.wav"), 
 					  load("res://Audio/mechanical_keyboard_8.wav")]
 
+func SetupWordSettings():
+	#Set LETTER_COUNT
+	LETTER_COUNT = CURRENT_WORD.length()
+	
+	#Set CURRENT_WORD_ARRAY
+	var letra : String
+	var cantidadEnPalabra : int
+	for i in LETTER_COUNT:
+		letra = CURRENT_WORD.substr(i, 1)
+		cantidadEnPalabra = CURRENT_WORD.count(letra)
+		CURRENT_WORD_POSITIONS[String(i)] = letra
+		if !CURRENT_WORD_ARRAY.has(letra):
+			CURRENT_WORD_ARRAY[letra] = cantidadEnPalabra
+
 func _ready():
+	SetupWordSettings()
+	
+	boxWidth = 640 / LETTER_COUNT
+	boxHeight = boxWidth
+	
 	#Creación de las filas del juego
 	for i in ROWS:
 		var row = HBoxContainer.new()
@@ -133,6 +152,7 @@ func _ready():
 					if teclas3[x] == "Enter" or teclas3[x] == "Del":
 						tecla.rect_min_size = Vector2(rowWidth / 6.6, rowHeight)
 						tecla.rect_size = Vector2(rowWidth / 6.6, rowHeight)
+						tecla.stretch_mode = TextureButton.STRETCH_SCALE
 					else:
 						tecla.rect_min_size = Vector2(rowWidth / 9.7, rowHeight)
 						tecla.rect_size = Vector2(rowWidth / 9.7, rowHeight)
@@ -583,7 +603,7 @@ func playRandomKeySound(player : AudioStreamPlayer):
 	player.play()
 
 
-func updateHealthTexture():
+func updateHealthTexture():	
 	match HealthManager.CURRENT_HEALTH:
 		0:
 			HealthTexture.texture = load("res://UI/HealthMinus3.png")
@@ -606,4 +626,4 @@ func _on_ErrorAnimationPlayer_animation_finished(anim_name):
 func _on_WinMessage_SiguientePalabraPressed():
 	var response = get_tree().change_scene_to(NextLevel)
 	if response == ERR_CANT_CREATE:
-		print("Unable to change to " + String(NextLevel) + ", check Nivel3 '_on_WinMessage_SiguientePalabraPressed()'")
+		print("Unable to change to " + String(NextLevel) + ", check Nivel1 '_on_WinMessage_SiguientePalabraPressed()'")

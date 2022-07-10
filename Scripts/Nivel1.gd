@@ -2,9 +2,9 @@ extends Node2D
 
 ## VALORES A CAMBIAR POR CADA NIVEL ################################################################
 export(String) var CURRENT_WORD = "PANCHO"
-const CURRENT_WORD_ARRAY = {"P": 1, "A": 1, "N": 1, "C": 1, "H": 1, "O": 1}
-const CURRENT_WORD_POSITIONS = {"0": "P", "1": "A", "2": "N", "3": "C", "4": "H", "5": "O"}
-export(int) var LETTER_COUNT = 6 #COMENZANDO DESDE EL 1
+var CURRENT_WORD_ARRAY = {}
+var CURRENT_WORD_POSITIONS = {}
+var LETTER_COUNT : int
 export(int) var ROWS = 6
 var NextLevel = preload("res://Scenes/Nivel2.tscn")
 ####################################################################################################
@@ -33,8 +33,8 @@ var nodoColumActual
 #$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
 
 
-var boxWidth = 640 / LETTER_COUNT
-var boxHeight = boxWidth
+var boxWidth 
+var boxHeight
 var tempWordArray
 var isErrorActive : bool = false
 var GAME_WON : bool = false
@@ -52,7 +52,26 @@ var arrayKeySounds = [load("res://Audio/mechanical_keyboard_1.wav"),
 					  load("res://Audio/mechanical_keyboard_7.wav"), 
 					  load("res://Audio/mechanical_keyboard_8.wav")]
 
+func SetupWordSettings():
+	#Set LETTER_COUNT
+	LETTER_COUNT = CURRENT_WORD.length()
+	
+	#Set CURRENT_WORD_ARRAY
+	var letra : String
+	var cantidadEnPalabra : int
+	for i in LETTER_COUNT:
+		letra = CURRENT_WORD.substr(i, 1)
+		cantidadEnPalabra = CURRENT_WORD.count(letra)
+		CURRENT_WORD_POSITIONS[String(i)] = letra
+		if !CURRENT_WORD_ARRAY.has(letra):
+			CURRENT_WORD_ARRAY[letra] = cantidadEnPalabra
+
 func _ready():
+	SetupWordSettings()
+	
+	boxWidth = 640 / LETTER_COUNT
+	boxHeight = boxWidth
+	
 	#Creación de las filas del juego
 	for i in ROWS:
 		var row = HBoxContainer.new()
@@ -133,6 +152,7 @@ func _ready():
 					if teclas3[x] == "Enter" or teclas3[x] == "Del":
 						tecla.rect_min_size = Vector2(rowWidth / 6.6, rowHeight)
 						tecla.rect_size = Vector2(rowWidth / 6.6, rowHeight)
+						tecla.stretch_mode = TextureButton.STRETCH_SCALE
 					else:
 						tecla.rect_min_size = Vector2(rowWidth / 9.7, rowHeight)
 						tecla.rect_size = Vector2(rowWidth / 9.7, rowHeight)
