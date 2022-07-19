@@ -226,6 +226,9 @@ margin_right = 66.0
 margin_bottom = 66.0
 rect_min_size = Vector2( 66, 66 )
 script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
 CURRENT_LETTER = "A"
 CURRENT_STATE = "White"
 

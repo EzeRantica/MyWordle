@@ -5,8 +5,6 @@ export(String, "White", "Grey", "Yellow", "Green") var CURRENT_STATE
 export(float) var Size = 80
 
 func _process(_delta):
-	$TextNode.text = CURRENT_LETTER
-	
 	if CURRENT_LETTER == "NULL":
 		$TextNode.text = ""
 	else:
@@ -24,6 +22,8 @@ func flipLetter():
 	$AnimationPlayer.play("FlipLetter1")
 	yield($AnimationPlayer, "animation_finished")
 	match CURRENT_STATE:
+		"White":
+			$BackgroundNode.texture = load("res://Letras/CuadroVacio_transparente2.png")
 		"Grey":
 			$BackgroundNode.texture = load("res://Letras/cuadro_fondo_gris2.png")
 		"Yellow":

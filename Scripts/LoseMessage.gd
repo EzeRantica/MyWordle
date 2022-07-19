@@ -1,6 +1,6 @@
 extends Sprite
 
-signal SiguienPalabraPressed
+signal ReiniciarPressed
 
 func _input(event):
 	if event.is_action_pressed("ENTER") or event.is_action_pressed("ESPACIO"):
@@ -10,4 +10,4 @@ func ChangeWinningWord(word):
 	$CorrectWordNode.text = word.to_upper()
 
 func _on_SiguientePalabraButton_pressed():
-	emit_signal("SiguienPalabraPressed")
+	emit_signal("ReiniciarPressed")

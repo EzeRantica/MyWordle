@@ -4,7 +4,7 @@
 [ext_resource path="res://Fonts/HelveticaNeueBold.ttf" type="DynamicFontData" id=2]
 [ext_resource path="res://Letras/reiniciar_button.png" type="Texture" id=3]
 [ext_resource path="res://Letras/reiniciar_button_hover.png" type="Texture" id=4]
-[ext_resource path="res://Scripts/WinMessage.gd" type="Script" id=5]
+[ext_resource path="res://Scripts/LoseMessage.gd" type="Script" id=5]
 
 [sub_resource type="DynamicFont" id=1]
 size = 40

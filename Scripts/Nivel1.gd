@@ -389,7 +389,6 @@ func _input(event):
 				current_col = 0
 				current_row += 1
 				if current_row == ROWS:
-					print("YOU'RE OUT OF GUESSES :(")
 					HealthManager.TakeHit()
 					ResetLevel()
 				#END if row == ROWS
@@ -649,7 +648,16 @@ func _on_LoseMessage_ReiniciarPressed():
 
 
 func ResetLevel():
-	pass
+	var filas = $Main/HCenterContainer/CenterContent/RowsContainer.get_children()
+	for x in LETTER_COUNT:
+		var filaActual = filas[x].get_children()
+		for letraActual in filaActual:
+			TypeLetter("NULL", letraActual)
+			letraActual.CURRENT_STATE = "White"
+			letraActual.flipLetter()
+	
+	current_col = 0
+	current_row = 0
 
 
 
