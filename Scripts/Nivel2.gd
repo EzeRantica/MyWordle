@@ -1,7 +1,7 @@
 extends Node2D
 
 ## VALORES A CAMBIAR POR CADA NIVEL ################################################################
-export(String) var CURRENT_WORD = "SANTI"
+export(String) var CURRENT_WORD = "MATES"
 var CURRENT_WORD_ARRAY = {}
 var CURRENT_WORD_POSITIONS = {}
 var LETTER_COUNT : int
@@ -12,6 +12,7 @@ var NextLevel = preload("res://Scenes/Nivel3.tscn")
 var blankLetterContainer = preload("res://Letras/CuadroVacio_transparente.png")
 var LetterScene = preload("res://Scenes/Letter.tscn")
 var WinMessageScene = preload("res://Scenes/WinMessage.tscn")
+var LoseMessage = preload("res://Scenes/LoseMessage.tscn")
 var teclaScene = preload("res://Scenes/Tecla.tscn")
 
 var teclas1 =  {"0": "Q", "1": "W","2": "E","3": "R","4": "T",
@@ -65,6 +66,7 @@ func SetupWordSettings():
 		CURRENT_WORD_POSITIONS[String(i)] = letra
 		if !CURRENT_WORD_ARRAY.has(letra):
 			CURRENT_WORD_ARRAY[letra] = cantidadEnPalabra
+	print(String(CURRENT_WORD) + " / " + String(LETTER_COUNT) + " / " + String(current_col) + ":" + String(current_row))
 
 func _ready():
 	SetupWordSettings()
@@ -181,6 +183,7 @@ func _ready():
 	
 	HealthManager.ResetHealth()
 	var _conn = HealthManager.connect("HealthUpdated", self, "updateHealthTexture")
+	var _conn2 = HealthManager.connect("HealthEmpty", self, "HealthEmpty")
 
 func _process(_delta):
 	$Main/HCenterContainer/VBoxContainer/CurrentCol.text = "COL: " + String(current_col) + "\n" + "ROW: " + String(current_row)
@@ -387,8 +390,8 @@ func _input(event):
 				current_col = 0
 				current_row += 1
 				if current_row == ROWS:
-					print("YOU'RE OUT OF GUESSES :(")
 					HealthManager.TakeHit()
+					ResetLevel()
 				#END if row == ROWS
 			#END if VerificarPalabraExistente()
 		#END if col == LETTER COUNT
@@ -603,7 +606,7 @@ func playRandomKeySound(player : AudioStreamPlayer):
 	player.play()
 
 
-func updateHealthTexture():	
+func updateHealthTexture():
 	match HealthManager.CURRENT_HEALTH:
 		0:
 			HealthTexture.texture = load("res://UI/HealthMinus3.png")
@@ -616,6 +619,18 @@ func updateHealthTexture():
 	
 	play_sound($Main/SFXPlayer, load("res://Audio/oof.wav"))
 
+func HealthEmpty():
+	var LoseMessage = LoseMessage.instance()
+	var posX = get_viewport().get_visible_rect().size.x / 6
+	var posY = get_viewport().get_visible_rect().size.y / 2
+	LoseMessage.position = Vector2(posX, posY)
+	LoseMessage.connect("ReiniciarPressed", self, "_on_LoseMessage_ReiniciarPressed")
+	
+	LoseMessage.ChangeWinningWord(CURRENT_WORD)
+	
+	self.add_child(LoseMessage)
+	yield(get_tree().create_timer(1), "timeout")
+	get_tree().paused = true
 
 func _on_ErrorAnimationPlayer_animation_finished(anim_name):
 	if anim_name == "Error" or anim_name == "FadeOut":
@@ -627,3 +642,28 @@ func _on_WinMessage_SiguientePalabraPressed():
 	var response = get_tree().change_scene_to(NextLevel)
 	if response == ERR_CANT_CREATE:
 		print("Unable to change to " + String(NextLevel) + ", check Nivel1 '_on_WinMessage_SiguientePalabraPressed()'")
+
+
+func _on_LoseMessage_ReiniciarPressed():
+	var _change = get_tree().change_scene("res://Scenes/Main.tscn")
+
+
+func ResetLevel():
+	var filas = $Main/HCenterContainer/CenterContent/RowsContainer.get_children()
+	for x in LETTER_COUNT:
+		var filaActual = filas[x].get_children()
+		for letraActual in filaActual:
+			TypeLetter("NULL", letraActual)
+			letraActual.CURRENT_STATE = "White"
+			letraActual.flipLetter()
+	
+	current_col = 0
+	current_row = 0
+
+
+
+
+
+
+
+

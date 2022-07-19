@@ -111295,4 +111295,8 @@ var Palabras = ["a",
 "Chat",
 "Siete",
 "Micaela",
-"Micateamo"]
+"Tinder",
+"Pizza",
+"Mates",
+"Mate",
+"Bikihr"]
