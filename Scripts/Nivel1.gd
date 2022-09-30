@@ -638,6 +638,7 @@ func _on_ErrorAnimationPlayer_animation_finished(anim_name):
 		$Main/HCenterContainer/HBoxContainer/ErrorAnimationPlayer.play("FadeOut")
 
 func _on_WinMessage_SiguientePalabraPressed():
+	ResetLevel()
 	var response = get_tree().change_scene_to(NextLevel)
 	if response == ERR_CANT_CREATE:
 		print("Unable to change to " + String(NextLevel) + ", check Nivel1 '_on_WinMessage_SiguientePalabraPressed()'")
