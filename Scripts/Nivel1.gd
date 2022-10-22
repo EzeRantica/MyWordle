@@ -292,8 +292,8 @@ func ShowWinMessage():
 	
 	WinMessage.ChangeWinningWord(CURRENT_WORD)
 	
-	self.add_child(WinMessage)
 	yield(get_tree().create_timer(1), "timeout")
+	self.add_child(WinMessage)
 	get_tree().paused = true
 
 
@@ -639,6 +639,7 @@ func _on_ErrorAnimationPlayer_animation_finished(anim_name):
 
 func _on_WinMessage_SiguientePalabraPressed():
 	ResetLevel()
+	get_tree().paused = false
 	var response = get_tree().change_scene_to(NextLevel)
 	if response == ERR_CANT_CREATE:
 		print("Unable to change to " + String(NextLevel) + ", check Nivel1 '_on_WinMessage_SiguientePalabraPressed()'")
