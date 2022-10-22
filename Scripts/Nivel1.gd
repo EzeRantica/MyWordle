@@ -1,7 +1,7 @@
 extends Node2D
 
 ## VALORES A CAMBIAR POR CADA NIVEL ################################################################
-export(String) var CURRENT_WORD = "PANCHO"
+export(String) var CURRENT_WORD = "ENERO"
 var CURRENT_WORD_ARRAY = {}
 var CURRENT_WORD_POSITIONS = {}
 var LETTER_COUNT : int
