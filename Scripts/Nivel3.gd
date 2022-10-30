@@ -619,15 +619,15 @@ func updateHealthTexture():
 	play_sound($Main/SFXPlayer, load("res://Audio/oof.wav"))
 
 func HealthEmpty():
-	var LoseMessage = LoseMessage.instance()
+	var LoseMessageInstance = LoseMessage.instance()
 	var posX = get_viewport().get_visible_rect().size.x / 6
 	var posY = get_viewport().get_visible_rect().size.y / 2
-	LoseMessage.position = Vector2(posX, posY)
-	LoseMessage.connect("ReiniciarPressed", self, "_on_LoseMessage_ReiniciarPressed")
+	LoseMessageInstance.position = Vector2(posX, posY)
+	LoseMessageInstance.connect("ReiniciarPressed", self, "_on_LoseMessage_ReiniciarPressed")
 	
-	LoseMessage.ChangeWinningWord(CURRENT_WORD)
+	LoseMessageInstance.ChangeWinningWord(CURRENT_WORD)
 	
-	self.add_child(LoseMessage)
+	self.add_child(LoseMessageInstance)
 	yield(get_tree().create_timer(1), "timeout")
 	get_tree().paused = true
 
@@ -651,7 +651,7 @@ func _on_LoseMessage_ReiniciarPressed():
 
 func ResetLevel():
 	var filas = $Main/HCenterContainer/CenterContent/RowsContainer.get_children()
-	for x in LETTER_COUNT:
+	for x in 6:
 		var filaActual = filas[x].get_children()
 		for letraActual in filaActual:
 			TypeLetter("NULL", letraActual)
