@@ -70,6 +70,7 @@ func SetupWordSettings():
 func _ready():
 	SetupWordSettings()
 	
+# warning-ignore:integer_division
 	boxWidth = 640 / LETTER_COUNT
 	boxHeight = boxWidth
 	
@@ -291,6 +292,7 @@ func ShowWinMessage():
 	WinMessage.connect("SiguienPalabraPressed", self, "_on_WinMessage_SiguientePalabraPressed")
 	
 	WinMessage.ChangeWinningWord(CURRENT_WORD)
+	WinMessage.SetDescriptionLabelTo("El mate fue como un comodín, sin conocerla no había\nmuchas otras cosas para invitarla a hacer")
 	
 	yield(get_tree().create_timer(1), "timeout")
 	self.add_child(WinMessage)

@@ -111297,4 +111297,6 @@ var Palabras = ["a",
 "Micaela",
 "Taylor",
 "Musica",
-"Música"]
+"Música",
+"Dragon",
+"Nuero"]

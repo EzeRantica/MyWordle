@@ -6,7 +6,7 @@ var CURRENT_WORD_ARRAY = {}
 var CURRENT_WORD_POSITIONS = {}
 var LETTER_COUNT : int
 export(int) var ROWS = 6
-var NextLevel = preload("res://Scenes/WinMessage.tscn")
+var NextLevel = preload("res://Scenes/Nivel6.tscn")
 ####################################################################################################
 
 var blankLetterContainer = preload("res://Letras/CuadroVacio_transparente.png")
@@ -70,6 +70,7 @@ func SetupWordSettings():
 func _ready():
 	SetupWordSettings()
 	
+# warning-ignore:integer_division
 	boxWidth = 640 / LETTER_COUNT
 	boxHeight = boxWidth
 	
@@ -291,6 +292,7 @@ func ShowWinMessage():
 	WinMessage.connect("SiguienPalabraPressed", self, "_on_WinMessage_SiguientePalabraPressed")
 	
 	WinMessage.ChangeWinningWord(CURRENT_WORD)
+	WinMessage.SetDescriptionLabelTo("La música después de conocerla tiene un sonido diferente")
 	
 	yield(get_tree().create_timer(1), "timeout")
 	self.add_child(WinMessage)

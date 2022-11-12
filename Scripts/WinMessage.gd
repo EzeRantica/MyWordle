@@ -19,3 +19,7 @@ func _on_SiguientePalabraButton_pressed():
 func EmitButtonPressed():
 	emit_signal("SiguienPalabraPressed")
 	pass
+
+
+func SetDescriptionLabelTo(desc):
+	$DescriptionNode.text = desc

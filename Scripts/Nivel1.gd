@@ -70,6 +70,7 @@ func SetupWordSettings():
 func _ready():
 	SetupWordSettings()
 	
+# warning-ignore:integer_division
 	boxWidth = 640 / LETTER_COUNT
 	boxHeight = boxWidth
 	
@@ -291,6 +292,7 @@ func ShowWinMessage():
 	WinMessage.connect("SiguienPalabraPressed", self, "_on_WinMessage_SiguientePalabraPressed")
 	
 	WinMessage.ChangeWinningWord(CURRENT_WORD)
+	WinMessage.SetDescriptionLabelTo("20 de enero de 2022, el comienzo")
 	
 	yield(get_tree().create_timer(1), "timeout")
 	self.add_child(WinMessage)

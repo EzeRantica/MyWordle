@@ -1,7 +1,7 @@
 TO DO:
-1. Terminar sistema de vidas (falta resetear intentos al perder un corazón)
-2. Rehacer el mensaje de victoria.
-3. Sistema de reinicio de nivel.
+1. Terminar sistema de vidas (falta resetear intentos al perder un corazón) - LISTO
+2. Rehacer el mensaje de victoria. - LISTO
+3. Sistema de reinicio de nivel. - LISTO
 4. Ir al menú principal al quedarse sin vidas.
 5. Hacer Menú Principal.
 6. Memes al adivinar correctamente y al perder una vida (o todas las vidas)
