@@ -1,13 +1,13 @@
 extends Node2D
 
 ## VALORES A CAMBIAR POR CADA NIVEL ################################################################
-export(String) var CURRENT_WORD = "TAYLOR"
-export(String) var WORD_MESSAGE = "Me contó que esperandomé, en el bar de al lado,\npusieron varios temas de Taylor Swift\ny que hacía poco que había descubierto\nsus trabajos favoritos"
+export(String) var CURRENT_WORD = "CINE"
+export(String) var WORD_MESSAGE = "Me gusta como Paris, Texas usa los colores y los\nespacios para delimitar los sentimientos\ndel personaje principal"
 var CURRENT_WORD_ARRAY = {}
 var CURRENT_WORD_POSITIONS = {}
 var LETTER_COUNT : int
 export(int) var ROWS = 6
-var NextLevel = preload("res://Scenes/Nivel4.tscn")
+var NextLevel = preload("res://Scenes/Nivel2.tscn")
 ####################################################################################################
 
 var blankLetterContainer = preload("res://Letras/CuadroVacio_transparente.png")

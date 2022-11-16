@@ -3,7 +3,7 @@
 [ext_resource path="res://Fonts/HelveticaNeueBold.ttf" type="DynamicFontData" id=1]
 [ext_resource path="res://Letras/Worlde_Title.png" type="Texture" id=2]
 [ext_resource path="res://Letras/White_texture.png" type="Texture" id=3]
-[ext_resource path="res://Scripts/Nivel5.gd" type="Script" id=4]
+[ext_resource path="res://Scripts/Nivel11.gd" type="Script" id=4]
 [ext_resource path="res://UI/HealthFull.png" type="Texture" id=5]
 [ext_resource path="res://UI/Rules.png" type="Texture" id=6]
 [ext_resource path="res://Audio/Laptop_Keystroke_82.wav" type="AudioStream" id=7]
@@ -109,10 +109,8 @@ tracks/0/keys = {
 "values": [ Color( 0.964706, 0.188235, 0.188235, 0 ) ]
 }
 
-[node name="Nivel5" type="Node2D"]
+[node name="Nivel11" type="Node2D"]
 script = ExtResource( 4 )
-WORD_MESSAGE = "La música, después de conocerla, tiene
-un sonido diferente"
 
 [node name="Main" type="Control" parent="."]
 margin_right = 1280.0

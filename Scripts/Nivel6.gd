@@ -2,11 +2,12 @@ extends Node2D
 
 ## VALORES A CAMBIAR POR CADA NIVEL ################################################################
 export(String) var CURRENT_WORD = "DRAGON"
+export(String) var WORD_MESSAGE = "Sigo pensando que no se ve la diferencia de\ntamaño en las series (excepto por el último\nespisodio de House of the Dragon)"
 var CURRENT_WORD_ARRAY = {}
 var CURRENT_WORD_POSITIONS = {}
 var LETTER_COUNT : int
 export(int) var ROWS = 6
-var NextLevel = preload("res://Scenes/FinScene.tscn")
+var NextLevel = preload("res://Scenes/Nivel7.tscn")
 ####################################################################################################
 
 var blankLetterContainer = preload("res://Letras/CuadroVacio_transparente.png")
@@ -43,6 +44,7 @@ var TEMP_WORD_ARRAY
 var palabrasFiltradas
 var arrayEstados = []
 onready var HealthTexture = $Main/HCenterContainer/VBoxContainer/HBoxContainer/HealthTexture
+var PROCESSING_WORD : bool = false
 
 var arrayKeySounds = [load("res://Audio/mechanical_keyboard_1.wav"), 
 					  load("res://Audio/mechanical_keyboard_2.wav"), 
@@ -292,7 +294,7 @@ func ShowWinMessage():
 	WinMessage.connect("SiguienPalabraPressed", self, "_on_WinMessage_SiguientePalabraPressed")
 	
 	WinMessage.ChangeWinningWord(CURRENT_WORD)
-	WinMessage.SetDescriptionLabelTo("Sigo pensando que no se ve la diferencia de\ntamaño en las series (excepto por el último\nespisodio de House of the Dragon)")
+	WinMessage.SetDescriptionLabelTo(WORD_MESSAGE)
 	
 	yield(get_tree().create_timer(1), "timeout")
 	self.add_child(WinMessage)
@@ -344,9 +346,18 @@ func ValidarCambio(nodoTecla, colorEstado) -> bool:
 func _input(event):
 	if event.is_action_pressed("ENTER"):
 		if GAME_WON:
+			PROCESSING_WORD = false
+			return
+			
+		if PROCESSING_WORD:
 			return
 			
 		if current_col == LETTER_COUNT:
+			
+			#Se cambia el estado de PROCESSING_WORD -- hay que cambiarlo a false cuando se termine el proceso
+			#de determinar si la palabra escrita es correcta
+			PROCESSING_WORD = true
+			
 			#SE COMPARAN BUSCA LA PALABRA EN LA LISTA DE PALABRAS VÁLIDAS
 			var submitedWord = ""
 			
@@ -384,6 +395,7 @@ func _input(event):
 				
 				if submitedWord == CURRENT_WORD:
 					GAME_WON = true
+					PROCESSING_WORD = false
 					ShowWinMessage()
 					return
 				
@@ -391,12 +403,14 @@ func _input(event):
 				current_col = 0
 				current_row += 1
 				if current_row == ROWS:
+					PROCESSING_WORD = false
 					HealthManager.TakeHit()
 					ResetLevel()
 				#END if row == ROWS
 			#END if VerificarPalabraExistente()
 		#END if col == LETTER COUNT
 	#END if ENTER pressed
+	PROCESSING_WORD = false
 	
 	if event.is_action_pressed("DELETE"):
 		if GAME_WON:
@@ -547,7 +561,15 @@ func Enter_button_pressed():
 	if GAME_WON:
 		return
 		
+	if PROCESSING_WORD:
+		return
+	
 	if current_col == LETTER_COUNT:
+		
+		#Se cambia el estado de PROCESSING_WORD -- hay que cambiarlo a false cuando se termine el proceso
+		#de determinar si la palabra escrita es correcta
+		PROCESSING_WORD = true
+		
 		#SE COMPARAN BUSCA LA PALABRA EN LA LISTA DE PALABRAS VÁLIDAS
 		var submitedWord = ""
 		
@@ -583,6 +605,7 @@ func Enter_button_pressed():
 			
 			if submitedWord == CURRENT_WORD:
 				GAME_WON = true
+				PROCESSING_WORD = false
 				ShowWinMessage()
 				return
 			
@@ -592,9 +615,11 @@ func Enter_button_pressed():
 			if current_row == ROWS:
 				print("YOU'RE OUT OF GUESSES :(")
 				HealthManager.TakeHit()
+				PROCESSING_WORD = false
 			#END if row == ROWS
 		#END if VerificarPalabraExistente()
 	#END if col == LETTER COUNT
+	PROCESSING_WORD = false
 
 func play_sound(player : AudioStreamPlayer, sfx : AudioStream):
 	player.stream = sfx
@@ -627,7 +652,7 @@ func HealthEmpty():
 	LoseMessageInstance.position = Vector2(posX, posY)
 	LoseMessageInstance.connect("ReiniciarPressed", self, "_on_LoseMessage_ReiniciarPressed")
 	
-	LoseMessageInstance.ChangeWinningWord(CURRENT_WORD)
+#	LoseMessageInstance.ChangeWinningWord(CURRENT_WORD)
 	
 	self.add_child(LoseMessageInstance)
 	yield(get_tree().create_timer(1), "timeout")
@@ -662,7 +687,7 @@ func ResetLevel():
 	
 	current_col = 0
 	current_row = 0
-
+	PROCESSING_WORD = false
 
 
 
