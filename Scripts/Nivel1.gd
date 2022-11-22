@@ -43,7 +43,7 @@ var GAME_WON : bool = false
 var TEMP_WORD_ARRAY
 var palabrasFiltradas
 var arrayEstados = []
-onready var HealthTexture = $Main/HCenterContainer/VBoxContainer/HBoxContainer/HealthTexture
+onready var HealthTexture = $Main/HCenterContainer/CenterContent/HBoxContainer/HealthTexture
 var PROCESSING_WORD : bool = false
 
 var arrayKeySounds = [load("res://Audio/mechanical_keyboard_1.wav"), 
@@ -73,7 +73,7 @@ func _ready():
 	SetupWordSettings()
 	
 # warning-ignore:integer_division
-	boxWidth = 640 / LETTER_COUNT
+	boxWidth = 576 / LETTER_COUNT
 	boxHeight = boxWidth
 	
 	#Creación de las filas del juego
@@ -96,16 +96,25 @@ func _ready():
 	#Creación del teclado virtual
 	var tecladoContainer = VBoxContainer.new()
 	tecladoContainer.name = "TecladoContainer"
+	tecladoContainer.alignment = BoxContainer.ALIGN_END
+	
 	var teclado = VBoxContainer.new()
 	teclado.name = "Teclado"
 	teclado.alignment = BoxContainer.ALIGN_END
-	tecladoContainer.alignment = BoxContainer.ALIGN_END
 	
-	teclado.rect_min_size = Vector2($Main/HCenterContainer/CenterContent.rect_size.x , 150)
-	teclado.rect_size = Vector2($Main/HCenterContainer/CenterContent.rect_size.x, 150)
+	var CenterContentX = $Main/HCenterContainer/CenterContent.rect_size.x
+	var CenterContentY = $Main/HCenterContainer/CenterContent.rect_size.y
 	
-	tecladoContainer.rect_min_size = Vector2($Main/HCenterContainer/CenterContent.rect_size.x , 215)
-	tecladoContainer.rect_size = Vector2($Main/HCenterContainer/CenterContent.rect_size.x, 215)
+	teclado.rect_min_size = Vector2(CenterContentX - 100 , 150)
+	teclado.rect_size = Vector2(CenterContentX - 100, 150)
+	
+	var TopMarginY = $Main/HCenterContainer/CenterContent/MarginContainer.rect_size.y
+	var TitleContainerY = $Main/HCenterContainer/CenterContent/TitleContainer.rect_size.y
+	var HealthContainerY = $Main/HCenterContainer/CenterContent/HBoxContainer.rect_size.y
+	var RowsContainerY = $Main/HCenterContainer/CenterContent/RowsContainer.rect_size.y
+	
+	tecladoContainer.rect_min_size = Vector2(CenterContentX - 100, CenterContentY - TopMarginY - TitleContainerY - HealthContainerY - RowsContainerY - 120)
+	tecladoContainer.rect_size = Vector2(CenterContentX - 100, CenterContentY - TopMarginY - TitleContainerY - HealthContainerY - RowsContainerY - 120)
 	for i in 3:
 		var tecladoRow = HBoxContainer.new()
 		tecladoRow.alignment = BoxContainer.ALIGN_CENTER
