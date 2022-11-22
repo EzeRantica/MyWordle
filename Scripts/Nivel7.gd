@@ -188,7 +188,7 @@ func _ready():
 	var _conn2 = HealthManager.connect("HealthEmpty", self, "HealthEmpty")
 
 func _process(_delta):
-	$Main/HCenterContainer/VBoxContainer/CurrentCol.text = "COL: " + String(current_col) + "\n" + "ROW: " + String(current_row)
+	$Main/HCenterContainer/CenterContent/MarginContainer/CurrentCol.text = "COL: " + String(current_col) + "\n" + "ROW: " + String(current_row)
 	FindCurrentColNode()
 
 func FindCurrentColNode():

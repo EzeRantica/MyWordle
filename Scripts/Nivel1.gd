@@ -188,7 +188,7 @@ func _ready():
 	var _conn2 = HealthManager.connect("HealthEmpty", self, "HealthEmpty")
 
 func _process(_delta):
-	$Main/HCenterContainer/VBoxContainer/CurrentCol.text = "COL: " + String(current_col) + "\n" + "ROW: " + String(current_row)
+	$Main/HCenterContainer/CenterContent/MarginContainer/CurrentCol.text = "COL: " + String(current_col) + "\n" + "ROW: " + String(current_row)
 	FindCurrentColNode()
 
 func FindCurrentColNode():
@@ -242,10 +242,10 @@ func VerificarPalabraExistente(word) -> bool:
 				if item.to_upper().match(word.to_upper()):
 					return true
 	if !isErrorActive:
-		$Main/HCenterContainer/HBoxContainer/ErrorAnimationPlayer.play("Error")
+		$Main/HCenterContainer/ErrorAnimationPlayer.play("Error")
 		isErrorActive = true
 	else:
-		$Main/HCenterContainer/HBoxContainer/ErrorAnimationPlayer.play("ERRORR")
+		$Main/HCenterContainer/ErrorAnimationPlayer.play("ERRORR")
 		isErrorActive = true
 	#END if isErrorActive
 	
@@ -662,7 +662,7 @@ func _on_ErrorAnimationPlayer_animation_finished(anim_name):
 	if anim_name == "Error" or anim_name == "FadeOut":
 		isErrorActive = false
 	elif anim_name == "ERRORR":
-		$Main/HCenterContainer/HBoxContainer/ErrorAnimationPlayer.play("FadeOut")
+		$Main/HCenterContainer/ErrorAnimationPlayer.play("FadeOut")
 
 func _on_WinMessage_SiguientePalabraPressed():
 	ResetLevel()

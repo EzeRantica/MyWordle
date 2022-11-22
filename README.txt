@@ -4,7 +4,7 @@ TO DO:
 3. Sistema de reinicio de nivel. - LISTO
 4. Ir al menú principal al quedarse sin vidas.
 5. Hacer Menú Principal.
-6. Memes al adivinar correctamente y al perder una vida (o todas las vidas)
+6. Mover UI para Mobile
 
 
 7. Menu de opciones lleno de opciones innecesarias (antialiasing, calidad de texturas, calidad de sombras, 
