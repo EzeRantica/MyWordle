@@ -26,14 +26,12 @@ var row1
 var row2
 var row3
 
-
 #$$$$$$$$ VARIABLES DE POSICION DEL "CURSOR" (EN QUE CUADRADO SE ESTÁ ACTUALMENTE) $$$$$$$$$$$$$$$$$
 var current_col = 0 #Se actualiza cuando se escribe o borra una letra o se cambia de fila
 var current_row = 0 #La fila sólo se cambia cuando se envía una palabra válida
 var nodoColumActual
 #var nodoColumSiguiente
 #$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
-
 
 var boxWidth 
 var boxHeight
@@ -55,6 +53,14 @@ var arrayKeySounds = [load("res://Audio/mechanical_keyboard_1.wav"),
 					  load("res://Audio/mechanical_keyboard_7.wav"), 
 					  load("res://Audio/mechanical_keyboard_8.wav")]
 
+
+
+
+
+
+
+
+
 func SetupWordSettings():
 	#Set LETTER_COUNT
 	LETTER_COUNT = CURRENT_WORD.length()
@@ -69,12 +75,8 @@ func SetupWordSettings():
 		if !CURRENT_WORD_ARRAY.has(letra):
 			CURRENT_WORD_ARRAY[letra] = cantidadEnPalabra
 
-func _ready():
+func _ready(): #Creación de: Grilla del juego (6 filas de letras) y el teclado virtual -- Configuración de la lista de palabras válidas
 	SetupWordSettings()
-	
-# warning-ignore:integer_division
-	boxWidth = 576 / LETTER_COUNT
-	boxHeight = boxWidth
 	
 	#Creación de las filas del juego
 	for i in ROWS:
@@ -82,7 +84,7 @@ func _ready():
 		var rowWidth = $Main/HCenterContainer/CenterContent/RowsContainer.rect_size.x
 		var rowHeight = ($Main/HCenterContainer/CenterContent/RowsContainer.rect_size.y / 6)
 		row.alignment = BoxContainer.ALIGN_CENTER
-		row.rect_min_size = Vector2(426,50)
+		row.rect_min_size = Vector2(rowWidth, rowHeight)
 		#Creación de cada CAJA de Caracteres (Escena de Letter.tscn)
 		for x in LETTER_COUNT:
 			var letter = LetterScene.instance()
@@ -105,21 +107,17 @@ func _ready():
 	var CenterContentX = $Main/HCenterContainer/CenterContent.rect_size.x
 	var CenterContentY = $Main/HCenterContainer/CenterContent.rect_size.y
 	
-	teclado.rect_min_size = Vector2(CenterContentX - 100 , 150)
-	teclado.rect_size = Vector2(CenterContentX - 100, 150)
+	teclado.rect_min_size = Vector2(CenterContentX - 50 , 180)
+	teclado.rect_size = Vector2(CenterContentX - 50, 180)
 	
-	var TopMarginY = $Main/HCenterContainer/CenterContent/MarginContainer.rect_size.y
-	var TitleContainerY = $Main/HCenterContainer/CenterContent/TitleContainer.rect_size.y
-	var HealthContainerY = $Main/HCenterContainer/CenterContent/HBoxContainer.rect_size.y
-	var RowsContainerY = $Main/HCenterContainer/CenterContent/RowsContainer.rect_size.y
+	tecladoContainer.rect_min_size = Vector2(CenterContentX - 50, 270)
+	tecladoContainer.rect_size = Vector2(CenterContentX - 50, 270)
 	
-	tecladoContainer.rect_min_size = Vector2(CenterContentX - 100, CenterContentY - TopMarginY - TitleContainerY - HealthContainerY - RowsContainerY - 120)
-	tecladoContainer.rect_size = Vector2(CenterContentX - 100, CenterContentY - TopMarginY - TitleContainerY - HealthContainerY - RowsContainerY - 120)
 	for i in 3:
 		var tecladoRow = HBoxContainer.new()
 		tecladoRow.alignment = BoxContainer.ALIGN_CENTER
 		var rowWidth = teclado.rect_size.x
-		var rowHeight = teclado.rect_size.y / 3
+		var rowHeight = teclado.rect_size.y / 3.2
 		match i:
 			0:
 				for x in teclas1:
@@ -212,7 +210,6 @@ func FindCurrentColNode():
 			strNodoColumActual += String(current_col + 1)
 		nodoColumActual = get_node(strNodoColumActual)
 
-
 func FindColumNode(letterNumber : int):
 	var strNodoFilaActual = "Main/HCenterContainer/CenterContent/RowsContainer/HBoxContainer"
 	if current_row > 0:
@@ -297,7 +294,7 @@ func CalcularEstados(palabra):
 
 func ShowWinMessage():
 	var WinMessage = WinMessageScene.instance()
-	var posX = get_viewport().get_visible_rect().size.x / 6
+	var posX = get_viewport().get_visible_rect().size.x / 2
 	var posY = get_viewport().get_visible_rect().size.y / 2
 	WinMessage.position = Vector2(posX, posY)
 	WinMessage.connect("SiguienPalabraPressed", self, "_on_WinMessage_SiguientePalabraPressed")
@@ -308,7 +305,6 @@ func ShowWinMessage():
 	yield(get_tree().create_timer(1), "timeout")
 	self.add_child(WinMessage)
 	get_tree().paused = true
-
 
 func SetEstadoTecla(colorEstado, letraTecla):
 	match letraTecla:
@@ -324,7 +320,6 @@ func SetEstadoTecla(colorEstado, letraTecla):
 			var teclaSel = row3.get_node(String(letraTecla))
 			if teclaSel.has_method("SetColor") and ValidarCambio(teclaSel, colorEstado):
 				teclaSel.SetColor(colorEstado)
-
 
 func ValidarCambio(nodoTecla, colorEstado) -> bool:
 	var boolResultado : bool = false
@@ -353,94 +348,14 @@ func ValidarCambio(nodoTecla, colorEstado) -> bool:
 
 
 func _input(event):
+	if PROCESSING_WORD:
+		return
+	
 	if event.is_action_pressed("ENTER"):
-		if GAME_WON:
-			PROCESSING_WORD = false
-			return
-			
-		if PROCESSING_WORD:
-			return
-			
-		if current_col == LETTER_COUNT:
-			
-			#Se cambia el estado de PROCESSING_WORD -- hay que cambiarlo a false cuando se termine el proceso
-			#de determinar si la palabra escrita es correcta
-			PROCESSING_WORD = true
-			
-			#SE COMPARAN BUSCA LA PALABRA EN LA LISTA DE PALABRAS VÁLIDAS
-			var submitedWord = ""
-			
-			for letterIndex in LETTER_COUNT:
-				var letterNode = FindColumNode(letterIndex)
-				var character = letterNode.CURRENT_LETTER
-				submitedWord += String(character)
-			#END for LETTER COUNT
-			
-			if VerificarPalabraExistente(submitedWord): #SI LA PALABRA NO ESTÁ EN LA LISTA DE EXISTENTES NO SE SIGUE
-				#VERIFICAR ESTADOS DE TODAS LAS LETRAS
-				#PRIMERO RESETEO EL ARRAY PARA QUE TODAS QUEDEN GRISES
-				arrayEstados = []
-				for x in LETTER_COUNT:
-					arrayEstados.append("Grey")
-					
-				#SEGUNDO RECALCULO LOS ESTADOS
-				TEMP_WORD_ARRAY = CURRENT_WORD_ARRAY.duplicate()
-				CalcularEstados(TEMP_WORD_ARRAY)
-				
-				#BUSCAR NODOS DE FILAS Y LETRAS
-				var filas = $Main/HCenterContainer/CenterContent/RowsContainer.get_children()
-				var filaActual = filas[current_row].get_children()
-				
-				#POR CADA LETRA, LE APLICO EL ESTADO CORRESPONDIENTE A SU POSICION Y LA ACTUALIZO
-				var x = 0
-				for letraActual in filaActual:
-					letraActual.CURRENT_STATE = arrayEstados[x]
-					letraActual.flipLetter()
-					yield(get_tree().create_timer(0.2), "timeout")
-					SetEstadoTecla(arrayEstados[x], letraActual.CURRENT_LETTER)
-					x += 1
-					
-				#END for letras in filaActual
-				
-				if submitedWord == CURRENT_WORD:
-					GAME_WON = true
-					PROCESSING_WORD = false
-					ShowWinMessage()
-					return
-				
-				#AL FINAL - CAMBIAR DE FILA
-				current_col = 0
-				current_row += 1
-				if current_row == ROWS:
-					PROCESSING_WORD = false
-					HealthManager.TakeHit()
-					ResetLevel()
-				#END if row == ROWS
-			#END if VerificarPalabraExistente()
-		#END if col == LETTER COUNT
-	#END if ENTER pressed
-	PROCESSING_WORD = false
+		Enter_button_pressed()
 	
 	if event.is_action_pressed("DELETE"):
-		if GAME_WON:
-			return
-		
-		if current_row <= ROWS - 1:
-			current_col -= 1
-			if current_col < 0:
-				current_col = 0
-			FindCurrentColNode()
-			nodoColumActual.CURRENT_LETTER = "NULL"
-			
-			var y : int = randi() % 3
-			match y:
-				0:
-					play_sound($Main/SFXPlayer_Delete, load("res://Audio/mechanical_keyboard_1.wav"))
-				1:
-					play_sound($Main/SFXPlayer_Delete, load("res://Audio/mechanical_keyboard_5.wav"))
-				2:
-					play_sound($Main/SFXPlayer_Delete, load("res://Audio/mechanical_keyboard_6.wav"))
-	
+		Del_button_pressed()
 	
 	if current_row <= ROWS - 1 and current_col <= LETTER_COUNT - 1:
 		if event.is_action_pressed("A"):
@@ -527,7 +442,7 @@ func _input(event):
 		if event.is_action_pressed("LetterKey"):
 			nodoColumActual.updateLetter()
 #			play_sound($Main/SFXPlayer, load("res://Audio/Laptop_Keystroke_82.wav"))
-			playRandomKeySound($Main/SFXPlayer)
+#			playRandomKeySound($Main/SFXPlayer)
 		
 		#Luego de cambiar de Columna, chequeo que no se haya pasado de INDEX
 		if current_col > LETTER_COUNT:
@@ -537,13 +452,13 @@ func TypeLetter(letter : String, node):
 	current_col += 1
 	if current_col > LETTER_COUNT:
 		current_col = LETTER_COUNT
+		return
 	node.CURRENT_LETTER = letter
-
+	playRandomKeySound($Main/SFXPlayer)
 
 func letter_button_pressed(letter):
 	if letter != "Del" and letter != "Enter":
 		TypeLetter(letter, nodoColumActual)
-		playRandomKeySound($Main/SFXPlayer)
 
 func Del_button_pressed():
 	if GAME_WON:
@@ -565,12 +480,8 @@ func Del_button_pressed():
 			2:
 				play_sound($Main/SFXPlayer_Delete, load("res://Audio/mechanical_keyboard_6.wav"))
 
-
 func Enter_button_pressed():
 	if GAME_WON:
-		return
-		
-	if PROCESSING_WORD:
 		return
 	
 	if current_col == LETTER_COUNT:
@@ -625,6 +536,7 @@ func Enter_button_pressed():
 				print("YOU'RE OUT OF GUESSES :(")
 				HealthManager.TakeHit()
 				PROCESSING_WORD = false
+				ResetLevel()
 			#END if row == ROWS
 		#END if VerificarPalabraExistente()
 	#END if col == LETTER COUNT
@@ -634,12 +546,10 @@ func play_sound(player : AudioStreamPlayer, sfx : AudioStream):
 	player.stream = sfx
 	player.play()
 
-
 func playRandomKeySound(player : AudioStreamPlayer):
 	var x : int = randi() % 8
 	player.stream = arrayKeySounds[x]
 	player.play()
-
 
 func updateHealthTexture():
 	match HealthManager.CURRENT_HEALTH:
@@ -680,10 +590,8 @@ func _on_WinMessage_SiguientePalabraPressed():
 	if response == ERR_CANT_CREATE:
 		print("Unable to change to " + String(NextLevel) + ", check Nivel1 '_on_WinMessage_SiguientePalabraPressed()'")
 
-
 func _on_LoseMessage_ReiniciarPressed():
 	var _change = get_tree().change_scene("res://Scenes/Main.tscn")
-
 
 func ResetLevel():
 	var filas = $Main/HCenterContainer/CenterContent/RowsContainer.get_children()

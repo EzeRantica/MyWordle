@@ -4,6 +4,7 @@ export(String, "NULL", "A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L
 export(String, "White", "Grey", "Yellow", "Green") var CURRENT_STATE
 export(float) var Size = 80
 
+
 func _process(_delta):
 	if CURRENT_LETTER == "NULL":
 		$TextNode.text = ""
