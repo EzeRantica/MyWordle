@@ -456,6 +456,9 @@ func TypeLetter(letter : String, node):
 	node.CURRENT_LETTER = letter
 	playRandomKeySound($Main/SFXPlayer)
 
+func ResetLetter(letter : String, node):
+	node.CURRENT_LETTER = letter
+
 func letter_button_pressed(letter):
 	if letter != "Del" and letter != "Enter":
 		TypeLetter(letter, nodoColumActual)
@@ -566,7 +569,7 @@ func updateHealthTexture():
 
 func HealthEmpty():
 	var LoseMessageInstance = LoseMessage.instance()
-	var posX = get_viewport().get_visible_rect().size.x / 6
+	var posX = get_viewport().get_visible_rect().size.x / 2
 	var posY = get_viewport().get_visible_rect().size.y / 2
 	LoseMessageInstance.position = Vector2(posX, posY)
 	LoseMessageInstance.connect("ReiniciarPressed", self, "_on_LoseMessage_ReiniciarPressed")
@@ -594,16 +597,18 @@ func _on_LoseMessage_ReiniciarPressed():
 	var _change = get_tree().change_scene("res://Scenes/Main.tscn")
 
 func ResetLevel():
+	current_col = 0
+	current_row = 0
+	
 	var filas = $Main/HCenterContainer/CenterContent/RowsContainer.get_children()
+	
 	for x in 6:
 		var filaActual = filas[x].get_children()
 		for letraActual in filaActual:
-			TypeLetter("NULL", letraActual)
+			ResetLetter("NULL", letraActual)
 			letraActual.CURRENT_STATE = "White"
 			letraActual.flipLetter()
 	
-	current_col = 0
-	current_row = 0
 	PROCESSING_WORD = false
 
 
