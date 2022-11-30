@@ -523,6 +523,7 @@ func Enter_button_pressed():
 				letraActual.CURRENT_STATE = arrayEstados[x]
 				letraActual.flipLetter()
 				yield(get_tree().create_timer(0.2), "timeout")
+				SetEstadoTecla(arrayEstados[x], letraActual.CURRENT_LETTER)
 				x += 1
 			#END for letras in filaActual
 			
