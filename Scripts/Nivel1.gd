@@ -7,7 +7,7 @@ var CURRENT_WORD_ARRAY = {}
 var CURRENT_WORD_POSITIONS = {}
 var LETTER_COUNT : int
 export(int) var ROWS = 6
-var NextLevel = preload("res://Scenes/Nivel10.tscn")
+var NextLevel = preload("res://Scenes/Nivel2.tscn")
 ####################################################################################################
 
 var blankLetterContainer = preload("res://Letras/CuadroVacio_transparente.png")
@@ -191,8 +191,12 @@ func _ready(): #Creación de: Grilla del juego (6 filas de letras) y el teclado 
 	
 	
 	HealthManager.ResetHealth()
+	
+	#################Conexiones de señales
 	var _conn = HealthManager.connect("HealthUpdated", self, "updateHealthTexture")
 	var _conn2 = HealthManager.connect("HealthEmpty", self, "HealthEmpty")
+	var _conn3 = $Main/HCenterContainer/ErrorAnimationPlayer.connect("animation_finished", self, "_on_ErrorAnimationPlayer_animation_finished")
+	######################################
 
 func _process(_delta):
 	$Main/HCenterContainer/CenterContent/MarginContainer/CurrentCol.text = "COL: " + String(current_col) + "\n" + "ROW: " + String(current_row)

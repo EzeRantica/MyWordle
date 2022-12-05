@@ -225,5 +225,3 @@ bus = "Sounds"
 
 [node name="SFXPlayer_Delete" type="AudioStreamPlayer" parent="Main"]
 bus = "Sounds_2"
-
-[connection signal="animation_finished" from="Main/HCenterContainer/ErrorAnimationPlayer" to="." method="_on_ErrorAnimationPlayer_animation_finished"]

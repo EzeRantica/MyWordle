@@ -1,8 +1,8 @@
 extends Node2D
 
 ## VALORES A CAMBIAR POR CADA NIVEL ################################################################
-export(String) var CURRENT_WORD = "POOL"
-export(String) var WORD_MESSAGE = "A ella no le gusta cuando le gano, pero después\nde ver la emoción que tuvo al ganarme \na mí, no me arrepiento de nada.\n\nTambién me calienta mucho cuando juega al pool‎"
+export(String) var CURRENT_WORD = "WORDLE"
+export(String) var WORD_MESSAGE = "Un momento que se convirtió en hábito, un juego\nsimple que cada día nos da un instante\nde demostrar quien es la persona más\ninteligente del planeta\n\nRip Taylordle"
 var CURRENT_WORD_ARRAY = {}
 var CURRENT_WORD_POSITIONS = {}
 var LETTER_COUNT : int
@@ -191,8 +191,12 @@ func _ready(): #Creación de: Grilla del juego (6 filas de letras) y el teclado 
 	
 	
 	HealthManager.ResetHealth()
+	
+	#################Conexiones de señales
 	var _conn = HealthManager.connect("HealthUpdated", self, "updateHealthTexture")
 	var _conn2 = HealthManager.connect("HealthEmpty", self, "HealthEmpty")
+	var _conn3 = $Main/HCenterContainer/ErrorAnimationPlayer.connect("animation_finished", self, "_on_ErrorAnimationPlayer_animation_finished")
+	######################################
 
 func _process(_delta):
 	$Main/HCenterContainer/CenterContent/MarginContainer/CurrentCol.text = "COL: " + String(current_col) + "\n" + "ROW: " + String(current_row)
@@ -456,6 +460,9 @@ func TypeLetter(letter : String, node):
 	node.CURRENT_LETTER = letter
 	playRandomKeySound($Main/SFXPlayer)
 
+func ResetLetter(letter : String, node):
+	node.CURRENT_LETTER = letter
+
 func letter_button_pressed(letter):
 	if letter != "Del" and letter != "Enter":
 		TypeLetter(letter, nodoColumActual)
@@ -520,6 +527,7 @@ func Enter_button_pressed():
 				letraActual.CURRENT_STATE = arrayEstados[x]
 				letraActual.flipLetter()
 				yield(get_tree().create_timer(0.2), "timeout")
+				SetEstadoTecla(arrayEstados[x], letraActual.CURRENT_LETTER)
 				x += 1
 			#END for letras in filaActual
 			
@@ -566,7 +574,7 @@ func updateHealthTexture():
 
 func HealthEmpty():
 	var LoseMessageInstance = LoseMessage.instance()
-	var posX = get_viewport().get_visible_rect().size.x / 6
+	var posX = get_viewport().get_visible_rect().size.x / 2
 	var posY = get_viewport().get_visible_rect().size.y / 2
 	LoseMessageInstance.position = Vector2(posX, posY)
 	LoseMessageInstance.connect("ReiniciarPressed", self, "_on_LoseMessage_ReiniciarPressed")
@@ -594,16 +602,18 @@ func _on_LoseMessage_ReiniciarPressed():
 	var _change = get_tree().change_scene("res://Scenes/Main.tscn")
 
 func ResetLevel():
+	current_col = 0
+	current_row = 0
+	
 	var filas = $Main/HCenterContainer/CenterContent/RowsContainer.get_children()
+	
 	for x in 6:
 		var filaActual = filas[x].get_children()
 		for letraActual in filaActual:
-			TypeLetter("NULL", letraActual)
+			ResetLetter("NULL", letraActual)
 			letraActual.CURRENT_STATE = "White"
 			letraActual.flipLetter()
 	
-	current_col = 0
-	current_row = 0
 	PROCESSING_WORD = false
 
 

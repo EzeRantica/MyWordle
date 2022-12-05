@@ -5,8 +5,11 @@
 [ext_resource path="res://Letras/White_texture.png" type="Texture" id=3]
 [ext_resource path="res://Scripts/Nivel5.gd" type="Script" id=4]
 [ext_resource path="res://UI/HealthFull.png" type="Texture" id=5]
+[ext_resource path="res://UI/Error.tres" type="Animation" id=6]
 [ext_resource path="res://Audio/Laptop_Keystroke_82.wav" type="AudioStream" id=7]
 [ext_resource path="res://Scripts/CurrentColDebug.gd" type="Script" id=8]
+[ext_resource path="res://UI/FadeOut.tres" type="Animation" id=9]
+[ext_resource path="res://UI/ERRORR.tres" type="Animation" id=10]
 
 [sub_resource type="DynamicFont" id=13]
 size = 18
@@ -18,25 +21,11 @@ font_data = ExtResource( 1 )
 [sub_resource type="Theme" id=14]
 default_font = SubResource( 13 )
 
-[sub_resource type="Animation" id=15]
-resource_name = "ERRORR"
-
-[sub_resource type="Animation" id=16]
-resource_name = "Error"
-length = 2.0
-step = 0.01
-
-[sub_resource type="Animation" id=17]
-resource_name = "FadeOut"
-length = 0.5
-
 [sub_resource type="Animation" id=18]
 resource_name = "Idle"
 
 [node name="Nivel5" type="Node2D"]
 script = ExtResource( 4 )
-WORD_MESSAGE = "La música, después de conocerla, tiene
-un sonido diferente"
 
 [node name="Main" type="Control" parent="."]
 rect_scale = Vector2( 0.781312, 1.02546 )
@@ -141,9 +130,9 @@ margin_bottom = 692.0
 rect_min_size = Vector2( 576, 400 )
 
 [node name="ErrorAnimationPlayer" type="AnimationPlayer" parent="Main/HCenterContainer"]
-anims/ERRORR = SubResource( 15 )
-anims/Error = SubResource( 16 )
-anims/FadeOut = SubResource( 17 )
+anims/ERRORR = ExtResource( 10 )
+anims/Error = ExtResource( 6 )
+anims/FadeOut = ExtResource( 9 )
 anims/Idle = SubResource( 18 )
 
 [node name="MusicPlayer" type="AudioStreamPlayer" parent="Main"]
