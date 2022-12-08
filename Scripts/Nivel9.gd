@@ -7,6 +7,7 @@ var CURRENT_WORD_ARRAY = {}
 var CURRENT_WORD_POSITIONS = {}
 var LETTER_COUNT : int
 export(int) var ROWS = 6
+var CurrentLevel = "res://Scenes/Nivel9.tscn"
 var NextLevel = preload("res://Scenes/Nivel10.tscn")
 ####################################################################################################
 
@@ -105,7 +106,6 @@ func _ready(): #Creación de: Grilla del juego (6 filas de letras) y el teclado 
 	teclado.alignment = BoxContainer.ALIGN_END
 	
 	var CenterContentX = $Main/HCenterContainer/CenterContent.rect_size.x
-	var CenterContentY = $Main/HCenterContainer/CenterContent.rect_size.y
 	
 	teclado.rect_min_size = Vector2(CenterContentX - 50 , 180)
 	teclado.rect_size = Vector2(CenterContentX - 50, 180)
@@ -599,7 +599,8 @@ func _on_WinMessage_SiguientePalabraPressed():
 		print("Unable to change to " + String(NextLevel) + ", check Nivel1 '_on_WinMessage_SiguientePalabraPressed()'")
 
 func _on_LoseMessage_ReiniciarPressed():
-	var _change = get_tree().change_scene("res://Scenes/Main.tscn")
+	get_tree().paused = false
+	var _change = get_tree().change_scene(CurrentLevel)
 
 func ResetLevel():
 	current_col = 0

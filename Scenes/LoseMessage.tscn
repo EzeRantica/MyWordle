@@ -51,18 +51,15 @@ texture = ExtResource( 1 )
 script = ExtResource( 5 )
 
 [node name="Label1" type="Label" parent="."]
-margin_left = -277.5
+margin_left = -377.0
 margin_top = -175.0
-margin_right = 277.5
-margin_bottom = -25.0
+margin_right = 370.0
+margin_bottom = 212.0
 theme = SubResource( 2 )
-text = "NO PENSÉ QUE ALGUIEN
- PODRÍA SER TAN MALO A 
-ESTE JUEGO"
+text = "Vamos, vos podés"
 align = 1
-__meta__ = {
-"_edit_use_anchors_": false
-}
+autowrap = true
+uppercase = true
 
 [node name="SiguientePalabraButton" type="TextureButton" parent="."]
 margin_left = 130.0

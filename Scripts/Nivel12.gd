@@ -1,14 +1,14 @@
 extends Node2D
 
 ## VALORES A CAMBIAR POR CADA NIVEL ################################################################
-export(String) var CURRENT_WORD = "PIZZA"
-export(String) var WORD_MESSAGE = "MMmmmmmmm... Bikihr..."
+export(String) var CURRENT_WORD = "AMOR"
+export(String) var WORD_MESSAGE = "Te amo"
 var CURRENT_WORD_ARRAY = {}
 var CURRENT_WORD_POSITIONS = {}
 var LETTER_COUNT : int
 export(int) var ROWS = 6
-var CurrentLevel = "res://Scenes/Nivel11.tscn"
-var NextLevel = preload("res://Scenes/Nivel12.tscn")
+var CurrentLevel = "res://Scenes/Nivel12.tscn"
+var NextLevel = preload("res://Scenes/FinScene.tscn")
 ####################################################################################################
 
 var blankLetterContainer = preload("res://Letras/CuadroVacio_transparente.png")

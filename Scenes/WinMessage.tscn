@@ -27,16 +27,15 @@ font_data = ExtResource( 2 )
 [sub_resource type="Theme" id=8]
 default_font = SubResource( 7 )
 
-[sub_resource type="DynamicFont" id=9]
+[sub_resource type="DynamicFont" id=11]
 size = 25
 outline_size = 1
-outline_color = Color( 0.803922, 0.803922, 0.803922, 1 )
-use_filter = true
-extra_spacing_char = 3
+outline_color = Color( 0.439216, 0.439216, 0.439216, 1 )
+extra_spacing_char = 2
 font_data = ExtResource( 2 )
 
 [sub_resource type="Theme" id=10]
-default_font = SubResource( 9 )
+default_font = SubResource( 11 )
 
 [sub_resource type="Animation" id=5]
 resource_name = "IdleButtonAnimation"
@@ -79,9 +78,6 @@ margin_right = 283.0
 margin_bottom = -164.5
 theme = SubResource( 2 )
 text = "LA PALABRA CORRECTA ES:"
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="CorrectWordNode" type="Label" parent="."]
 self_modulate = Color( 0.611765, 0.34902, 1, 1 )
@@ -108,12 +104,12 @@ margin_bottom = 75.5
 grow_horizontal = 2
 grow_vertical = 2
 theme = SubResource( 10 )
+text = "No se que poner acá porque siempre que pongo algo
+es algo que no tiene sentido, y no se ve como se ve
+en el juego real, se ve todo raro"
 align = 1
 valign = 1
 uppercase = true
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="SiguientePalabraButton" type="TextureButton" parent="."]
 margin_left = 47.5

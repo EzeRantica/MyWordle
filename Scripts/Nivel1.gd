@@ -7,6 +7,7 @@ var CURRENT_WORD_ARRAY = {}
 var CURRENT_WORD_POSITIONS = {}
 var LETTER_COUNT : int
 export(int) var ROWS = 6
+var CurrentLevel = "res://Scenes/Nivel1.tscn"
 var NextLevel = preload("res://Scenes/Nivel2.tscn")
 ####################################################################################################
 
@@ -84,7 +85,7 @@ func _ready(): #Creación de: Grilla del juego (6 filas de letras) y el teclado 
 		var rowWidth = $Main/HCenterContainer/CenterContent/RowsContainer.rect_size.x
 		var rowHeight = ($Main/HCenterContainer/CenterContent/RowsContainer.rect_size.y / 6)
 		row.alignment = BoxContainer.ALIGN_CENTER
-		row.rect_min_size = Vector2(rowWidth, rowHeight)
+		row.rect_min_size = Vector2(rowHeight, rowHeight)
 		#Creación de cada CAJA de Caracteres (Escena de Letter.tscn)
 		for x in LETTER_COUNT:
 			var letter = LetterScene.instance()
@@ -105,7 +106,6 @@ func _ready(): #Creación de: Grilla del juego (6 filas de letras) y el teclado 
 	teclado.alignment = BoxContainer.ALIGN_END
 	
 	var CenterContentX = $Main/HCenterContainer/CenterContent.rect_size.x
-	var CenterContentY = $Main/HCenterContainer/CenterContent.rect_size.y
 	
 	teclado.rect_min_size = Vector2(CenterContentX - 50 , 180)
 	teclado.rect_size = Vector2(CenterContentX - 50, 180)
@@ -448,6 +448,11 @@ func _input(event):
 #			play_sound($Main/SFXPlayer, load("res://Audio/Laptop_Keystroke_82.wav"))
 #			playRandomKeySound($Main/SFXPlayer)
 		
+		if event.is_action_pressed("Punto"):
+			HealthManager.TakeHit()
+			HealthManager.TakeHit()
+			HealthManager.TakeHit()
+		
 		#Luego de cambiar de Columna, chequeo que no se haya pasado de INDEX
 		if current_col > LETTER_COUNT:
 			current_col = LETTER_COUNT
@@ -579,10 +584,8 @@ func HealthEmpty():
 	LoseMessageInstance.position = Vector2(posX, posY)
 	LoseMessageInstance.connect("ReiniciarPressed", self, "_on_LoseMessage_ReiniciarPressed")
 	
-#	LoseMessageInstance.ChangeWinningWord(CURRENT_WORD)
-	
-	self.add_child(LoseMessageInstance)
 	yield(get_tree().create_timer(1), "timeout")
+	self.add_child(LoseMessageInstance)
 	get_tree().paused = true
 
 func _on_ErrorAnimationPlayer_animation_finished(anim_name):
@@ -599,7 +602,8 @@ func _on_WinMessage_SiguientePalabraPressed():
 		print("Unable to change to " + String(NextLevel) + ", check Nivel1 '_on_WinMessage_SiguientePalabraPressed()'")
 
 func _on_LoseMessage_ReiniciarPressed():
-	var _change = get_tree().change_scene("res://Scenes/Main.tscn")
+	get_tree().paused = false
+	var _change = get_tree().change_scene(CurrentLevel)
 
 func ResetLevel():
 	current_col = 0

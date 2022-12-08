@@ -111303,4 +111303,5 @@ var Palabras = ["a",
 "Wordle",
 "Framed",
 "Taylordle",
-"Pool"]
+"Pool",
+"Termo"]
