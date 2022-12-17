@@ -1,0 +1,370 @@
+[gd_scene load_steps=11 format=2]
+
+[ext_resource path="res://UI/Micarle_Title.png" type="Texture" id=1]
+[ext_resource path="res://Letras/White_texture.png" type="Texture" id=2]
+[ext_resource path="res://Fonts/MainMenuButtonsTheme.tres" type="Theme" id=3]
+[ext_resource path="res://Scripts/MainMenu.gd" type="Script" id=4]
+[ext_resource path="res://UI/close_button.png" type="Texture" id=5]
+
+[sub_resource type="Animation" id=2]
+resource_name = "FromMainToOptions"
+
+[sub_resource type="Animation" id=3]
+resource_name = "FromMainToSelectLevel"
+length = 0.5
+tracks/0/type = "bezier"
+tracks/0/path = NodePath("SelectLevel:rect_position:x")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"points": PoolRealArray( 450, -0.25, 0, 0, 2.18237, 0, -0.5, -5.82376, 0.5, -5.82376 ),
+"times": PoolRealArray( 0, 0.5 )
+}
+tracks/1/type = "bezier"
+tracks/1/path = NodePath("SelectLevel:rect_position:y")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"points": PoolRealArray( 0, -0.25, 0, 0.25, 0, 0, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0, 0.5 )
+}
+tracks/2/type = "bezier"
+tracks/2/path = NodePath("Main:rect_position:x")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"points": PoolRealArray( 0, -0.25, 0, 0, 3.28146, -450, -0.5, -1.31937, 0.25, 0 ),
+"times": PoolRealArray( 0, 0.5 )
+}
+tracks/3/type = "bezier"
+tracks/3/path = NodePath("Main:rect_position:y")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"points": PoolRealArray( 0, -0.25, 0, 0.25, 0, 0, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0, 0.5 )
+}
+
+[sub_resource type="Animation" id=5]
+resource_name = "FromOptionsToMain"
+length = 0.5
+tracks/0/type = "bezier"
+tracks/0/path = NodePath("Options:rect_position:x")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"points": PoolRealArray( 470, -0.25, 0, 0, -11.4434, 0, -0.6, 0.367981, 0.25, 0 ),
+"times": PoolRealArray( 0, 0.5 )
+}
+tracks/1/type = "bezier"
+tracks/1/path = NodePath("Options:rect_position:y")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"points": PoolRealArray( 0, -0.25, 0, 0.25, 0, 0, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0, 0.5 )
+}
+
+[sub_resource type="Animation" id=1]
+resource_name = "FromSelectLevelToMain"
+length = 0.5
+tracks/0/type = "bezier"
+tracks/0/path = NodePath("Main:rect_position:x")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"points": PoolRealArray( -450, -0.25, 0, 0, 13.5408, 0, -0.5, -5.51425, 0.25, 0 ),
+"times": PoolRealArray( 0, 0.5 )
+}
+tracks/1/type = "bezier"
+tracks/1/path = NodePath("Main:rect_position:y")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"points": PoolRealArray( 0, -0.25, 0, 0.25, 0, 0, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0, 0.5 )
+}
+tracks/2/type = "bezier"
+tracks/2/path = NodePath("SelectLevel:rect_position:x")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"points": PoolRealArray( 0, -0.25, 0, 0, 9.34589, 450, -0.5, -2.27911, 0.25, 0 ),
+"times": PoolRealArray( 0, 0.5 )
+}
+tracks/3/type = "bezier"
+tracks/3/path = NodePath("SelectLevel:rect_position:y")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"points": PoolRealArray( 0, -0.25, 0, 0.25, 0, 0, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0, 0.5 )
+}
+
+[sub_resource type="Animation" id=4]
+length = 0.001
+tracks/0/type = "bezier"
+tracks/0/path = NodePath("SelectLevel:rect_position:x")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"points": PoolRealArray( 450, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0 )
+}
+tracks/1/type = "bezier"
+tracks/1/path = NodePath("SelectLevel:rect_position:y")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"points": PoolRealArray( 0, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0 )
+}
+tracks/2/type = "bezier"
+tracks/2/path = NodePath("Options:rect_position:x")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"points": PoolRealArray( 450, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0 )
+}
+tracks/3/type = "bezier"
+tracks/3/path = NodePath("Options:rect_position:y")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"points": PoolRealArray( 0, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0 )
+}
+tracks/4/type = "bezier"
+tracks/4/path = NodePath("Main:rect_position:x")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"points": PoolRealArray( 0, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0 )
+}
+tracks/5/type = "bezier"
+tracks/5/path = NodePath("Main:rect_position:y")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"points": PoolRealArray( 0, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0 )
+}
+
+[node name="MainMenu" type="Node2D"]
+script = ExtResource( 4 )
+
+[node name="Main" type="Control" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+rect_scale = Vector2( 0.781312, 1.02546 )
+
+[node name="TextureRect" type="TextureRect" parent="Main"]
+self_modulate = Color( 0.929412, 0.929412, 0.929412, 1 )
+anchor_right = 1.0
+anchor_bottom = 1.0
+rect_min_size = Vector2( 576, 1024 )
+texture = ExtResource( 2 )
+stretch_mode = 1
+
+[node name="TitleTexture" type="TextureRect" parent="Main"]
+margin_left = 108.791
+margin_top = 90.6909
+margin_right = 468.791
+margin_bottom = 150.691
+grow_horizontal = 2
+grow_vertical = 2
+rect_min_size = Vector2( 360, 60 )
+rect_pivot_offset = Vector2( 179.186, 33.1559 )
+texture = ExtResource( 1 )
+expand = true
+stretch_mode = 7
+
+[node name="StartGame" type="TextureButton" parent="Main"]
+margin_left = 167.667
+margin_top = 464.182
+margin_right = 426.667
+margin_bottom = 519.152
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="StartGameLabel" type="Label" parent="Main/StartGame"]
+self_modulate = Color( 0.556863, 0.556863, 0.556863, 1 )
+margin_left = 24.0636
+margin_top = 4.24261
+margin_right = 230.064
+margin_bottom = 47.2426
+theme = ExtResource( 3 )
+text = "COMENZAR"
+
+[node name="SelectLevel" type="TextureButton" parent="Main"]
+margin_left = 158.707
+margin_top = 559.749
+margin_right = 450.158
+margin_bottom = 614.719
+__meta__ = {
+"_edit_group_": true,
+"_editor_description_": ""
+}
+
+[node name="StartGameLabel" type="Label" parent="Main/SelectLevel"]
+self_modulate = Color( 0.556863, 0.556863, 0.556863, 1 )
+margin_left = 24.0636
+margin_top = 4.24261
+margin_right = 230.064
+margin_bottom = 47.2426
+theme = ExtResource( 3 )
+text = "ELEGIR NIVEL"
+
+[node name="Options" type="TextureButton" parent="Main"]
+margin_left = 180.466
+margin_top = 647.514
+margin_right = 414.438
+margin_bottom = 702.484
+__meta__ = {
+"_edit_group_": true,
+"_editor_description_": ""
+}
+
+[node name="StartGameLabel" type="Label" parent="Main/Options"]
+self_modulate = Color( 0.556863, 0.556863, 0.556863, 1 )
+margin_left = 24.0636
+margin_top = 4.24261
+margin_right = 230.064
+margin_bottom = 47.2426
+theme = ExtResource( 3 )
+text = "OPCIONES"
+
+[node name="SelectLevel" type="Control" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 450.0
+margin_right = 450.0
+rect_scale = Vector2( 0.781312, 1.02546 )
+__meta__ = {
+"_editor_description_": ""
+}
+
+[node name="TextureRect" type="TextureRect" parent="SelectLevel"]
+self_modulate = Color( 0.929412, 0.929412, 0.929412, 1 )
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_right = 576.0
+margin_bottom = 1024.0
+rect_min_size = Vector2( 576, 1024 )
+texture = ExtResource( 2 )
+stretch_mode = 1
+
+[node name="TitleTexture" type="TextureRect" parent="SelectLevel"]
+margin_left = 108.791
+margin_top = 90.6909
+margin_right = 468.791
+margin_bottom = 150.691
+grow_horizontal = 2
+grow_vertical = 2
+rect_min_size = Vector2( 360, 60 )
+rect_pivot_offset = Vector2( 179.186, 33.1559 )
+texture = ExtResource( 1 )
+expand = true
+stretch_mode = 7
+
+[node name="CenterHorizontalLevels" type="HBoxContainer" parent="SelectLevel"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_right = 576.0
+margin_bottom = 1024.0
+rect_min_size = Vector2( 450, 1024 )
+alignment = 1
+
+[node name="CenterVerticalLevels" type="VBoxContainer" parent="SelectLevel/CenterHorizontalLevels"]
+margin_left = 188.0
+margin_right = 388.0
+margin_bottom = 1024.0
+alignment = 1
+
+[node name="Nivel1-Button" type="TextureButton" parent="SelectLevel/CenterHorizontalLevels/CenterVerticalLevels"]
+margin_top = 310.0
+margin_right = 200.0
+margin_bottom = 510.0
+texture_normal = ExtResource( 5 )
+
+[node name="Nivel2-Button" type="TextureButton" parent="SelectLevel/CenterHorizontalLevels/CenterVerticalLevels"]
+margin_top = 514.0
+margin_right = 200.0
+margin_bottom = 714.0
+texture_normal = ExtResource( 5 )
+
+[node name="Options" type="Control" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 450.0
+margin_right = 450.0
+rect_scale = Vector2( 0.781312, 1.02546 )
+__meta__ = {
+"_editor_description_": ""
+}
+
+[node name="TextureRect" type="TextureRect" parent="Options"]
+self_modulate = Color( 0.929412, 0.929412, 0.929412, 1 )
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_right = 576.0
+margin_bottom = 1024.0
+rect_min_size = Vector2( 576, 1024 )
+texture = ExtResource( 2 )
+stretch_mode = 1
+
+[node name="TitleTexture" type="TextureRect" parent="Options"]
+margin_left = 108.791
+margin_top = 90.6909
+margin_right = 468.791
+margin_bottom = 150.691
+grow_horizontal = 2
+grow_vertical = 2
+rect_min_size = Vector2( 360, 60 )
+rect_pivot_offset = Vector2( 179.186, 33.1559 )
+texture = ExtResource( 1 )
+expand = true
+stretch_mode = 7
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+autoplay = "RESET"
+anims/FromMainToOptions = SubResource( 2 )
+anims/FromMainToSelectLevel = SubResource( 3 )
+anims/FromOptionsToMain = SubResource( 5 )
+anims/FromSelectLevelToMain = SubResource( 1 )
+anims/RESET = SubResource( 4 )
