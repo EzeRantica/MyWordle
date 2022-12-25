@@ -1,22 +1,11 @@
-[gd_scene load_steps=16 format=2]
+[gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://UI/Micarle_Title.png" type="Texture" id=1]
 [ext_resource path="res://Letras/White_texture.png" type="Texture" id=2]
 [ext_resource path="res://Fonts/MainMenuButtonsTheme.tres" type="Theme" id=3]
 [ext_resource path="res://Scripts/MainMenu.gd" type="Script" id=4]
 [ext_resource path="res://UI/close_button.png" type="Texture" id=5]
-[ext_resource path="res://UI/Level_square.png" type="Texture" id=6]
-[ext_resource path="res://Fonts/HelveticaNeueBold.ttf" type="DynamicFontData" id=7]
-
-[sub_resource type="DynamicFont" id=7]
-size = 35
-outline_size = 1
-outline_color = Color( 0, 0, 0, 1 )
-use_filter = true
-font_data = ExtResource( 7 )
-
-[sub_resource type="Theme" id=8]
-default_font = SubResource( 7 )
+[ext_resource path="res://Scenes/Nivel-Selection-Button.tscn" type="PackedScene" id=6]
 
 [sub_resource type="Animation" id=2]
 resource_name = "FromMainToOptions"
@@ -440,93 +429,24 @@ margin_right = 412.0
 margin_bottom = 483.0
 alignment = 1
 
-[node name="Nivel1-Button" type="TextureButton" parent="SelectLevel/CenterHorizontalLevels/CenterVerticalLevels/LevelsRow1"]
-margin_right = 100.0
-margin_bottom = 100.0
-rect_min_size = Vector2( 100, 100 )
-texture_normal = ExtResource( 6 )
-expand = true
-stretch_mode = 5
+[node name="Nivel1-Button" parent="SelectLevel/CenterHorizontalLevels/CenterVerticalLevels/LevelsRow1" instance=ExtResource( 6 )]
+Bloqueado = false
 
-[node name="Label" type="Label" parent="SelectLevel/CenterHorizontalLevels/CenterVerticalLevels/LevelsRow1/Nivel1-Button"]
-self_modulate = Color( 0, 0, 0, 1 )
-margin_left = 39.5904
-margin_top = 28.484
-margin_right = 58.5904
-margin_bottom = 71.484
-theme = SubResource( 8 )
-text = "1"
-align = 1
-valign = 1
-
-[node name="Nivel2-Button" type="TextureButton" parent="SelectLevel/CenterHorizontalLevels/CenterVerticalLevels/LevelsRow1"]
+[node name="Nivel2-Button" parent="SelectLevel/CenterHorizontalLevels/CenterVerticalLevels/LevelsRow1" instance=ExtResource( 6 )]
 margin_left = 104.0
 margin_right = 204.0
-margin_bottom = 100.0
-rect_min_size = Vector2( 100, 100 )
-texture_normal = ExtResource( 6 )
-expand = true
-stretch_mode = 5
-__meta__ = {
-"_editor_description_": ""
-}
+LevelNumber = 2
+Bloqueado = false
 
-[node name="Label2" type="Label" parent="SelectLevel/CenterHorizontalLevels/CenterVerticalLevels/LevelsRow1/Nivel2-Button"]
-self_modulate = Color( 0, 0, 0, 1 )
-margin_left = 40.542
-margin_top = 28.484
-margin_right = 59.542
-margin_bottom = 71.484
-theme = SubResource( 8 )
-text = "2"
-align = 1
-valign = 1
-
-[node name="Nivel3-Button" type="TextureButton" parent="SelectLevel/CenterHorizontalLevels/CenterVerticalLevels/LevelsRow1"]
+[node name="Nivel3-Button" parent="SelectLevel/CenterHorizontalLevels/CenterVerticalLevels/LevelsRow1" instance=ExtResource( 6 )]
 margin_left = 208.0
 margin_right = 308.0
-margin_bottom = 100.0
-rect_min_size = Vector2( 100, 100 )
-texture_normal = ExtResource( 6 )
-expand = true
-stretch_mode = 5
-__meta__ = {
-"_editor_description_": ""
-}
+LevelNumber = 3
 
-[node name="Label3" type="Label" parent="SelectLevel/CenterHorizontalLevels/CenterVerticalLevels/LevelsRow1/Nivel3-Button"]
-self_modulate = Color( 0, 0, 0, 1 )
-margin_left = 38.934
-margin_top = 28.484
-margin_right = 57.934
-margin_bottom = 71.484
-theme = SubResource( 8 )
-text = "3"
-align = 1
-valign = 1
-
-[node name="Nivel4-Button" type="TextureButton" parent="SelectLevel/CenterHorizontalLevels/CenterVerticalLevels/LevelsRow1"]
+[node name="Nivel4-Button" parent="SelectLevel/CenterHorizontalLevels/CenterVerticalLevels/LevelsRow1" instance=ExtResource( 6 )]
 margin_left = 312.0
 margin_right = 412.0
-margin_bottom = 100.0
-rect_min_size = Vector2( 100, 100 )
-texture_normal = ExtResource( 6 )
-expand = true
-stretch_mode = 5
-__meta__ = {
-"_editor_description_": ""
-}
-
-[node name="Label4" type="Label" parent="SelectLevel/CenterHorizontalLevels/CenterVerticalLevels/LevelsRow1/Nivel4-Button"]
-self_modulate = Color( 0, 0, 0, 1 )
-margin_left = 41.1655
-margin_top = 28.484
-margin_right = 60.1655
-margin_bottom = 71.484
-theme = SubResource( 8 )
-text = "4"
-align = 1
-valign = 1
+LevelNumber = 4
 
 [node name="LevelsRow2" type="HBoxContainer" parent="SelectLevel/CenterHorizontalLevels/CenterVerticalLevels"]
 margin_top = 487.0
@@ -534,93 +454,23 @@ margin_right = 412.0
 margin_bottom = 587.0
 alignment = 1
 
-[node name="Nivel5-Button" type="TextureButton" parent="SelectLevel/CenterHorizontalLevels/CenterVerticalLevels/LevelsRow2"]
-margin_right = 100.0
-margin_bottom = 100.0
-rect_min_size = Vector2( 100, 100 )
-texture_normal = ExtResource( 6 )
-expand = true
-stretch_mode = 5
+[node name="Nivel5-Button" parent="SelectLevel/CenterHorizontalLevels/CenterVerticalLevels/LevelsRow2" instance=ExtResource( 6 )]
+LevelNumber = 5
 
-[node name="Label5" type="Label" parent="SelectLevel/CenterHorizontalLevels/CenterVerticalLevels/LevelsRow2/Nivel5-Button"]
-self_modulate = Color( 0, 0, 0, 1 )
-margin_left = 39.5903
-margin_top = 27.8523
-margin_right = 58.5903
-margin_bottom = 70.8523
-theme = SubResource( 8 )
-text = "5"
-align = 1
-valign = 1
-
-[node name="Nivel6-Button" type="TextureButton" parent="SelectLevel/CenterHorizontalLevels/CenterVerticalLevels/LevelsRow2"]
+[node name="Nivel6-Button" parent="SelectLevel/CenterHorizontalLevels/CenterVerticalLevels/LevelsRow2" instance=ExtResource( 6 )]
 margin_left = 104.0
 margin_right = 204.0
-margin_bottom = 100.0
-rect_min_size = Vector2( 100, 100 )
-texture_normal = ExtResource( 6 )
-expand = true
-stretch_mode = 5
-__meta__ = {
-"_editor_description_": ""
-}
+LevelNumber = 6
 
-[node name="Label6" type="Label" parent="SelectLevel/CenterHorizontalLevels/CenterVerticalLevels/LevelsRow2/Nivel6-Button"]
-self_modulate = Color( 0, 0, 0, 1 )
-margin_left = 40.542
-margin_top = 27.8523
-margin_right = 59.542
-margin_bottom = 70.8523
-theme = SubResource( 8 )
-text = "6"
-align = 1
-valign = 1
-
-[node name="Nivel7-Button" type="TextureButton" parent="SelectLevel/CenterHorizontalLevels/CenterVerticalLevels/LevelsRow2"]
+[node name="Nivel7-Button" parent="SelectLevel/CenterHorizontalLevels/CenterVerticalLevels/LevelsRow2" instance=ExtResource( 6 )]
 margin_left = 208.0
 margin_right = 308.0
-margin_bottom = 100.0
-rect_min_size = Vector2( 100, 100 )
-texture_normal = ExtResource( 6 )
-expand = true
-stretch_mode = 5
-__meta__ = {
-"_editor_description_": ""
-}
+LevelNumber = 7
 
-[node name="Label7" type="Label" parent="SelectLevel/CenterHorizontalLevels/CenterVerticalLevels/LevelsRow2/Nivel7-Button"]
-self_modulate = Color( 0, 0, 0, 1 )
-margin_left = 38.934
-margin_top = 27.8523
-margin_right = 57.934
-margin_bottom = 70.8523
-theme = SubResource( 8 )
-text = "7"
-align = 1
-valign = 1
-
-[node name="Nivel8-Button" type="TextureButton" parent="SelectLevel/CenterHorizontalLevels/CenterVerticalLevels/LevelsRow2"]
+[node name="Nivel8-Button" parent="SelectLevel/CenterHorizontalLevels/CenterVerticalLevels/LevelsRow2" instance=ExtResource( 6 )]
 margin_left = 312.0
 margin_right = 412.0
-margin_bottom = 100.0
-rect_min_size = Vector2( 100, 100 )
-texture_normal = ExtResource( 6 )
-expand = true
-stretch_mode = 5
-__meta__ = {
-"_editor_description_": ""
-}
-
-[node name="Label8" type="Label" parent="SelectLevel/CenterHorizontalLevels/CenterVerticalLevels/LevelsRow2/Nivel8-Button"]
-self_modulate = Color( 0, 0, 0, 1 )
-margin_left = 41.1655
-margin_top = 27.8523
-margin_right = 60.1655
-margin_bottom = 70.8523
-theme = SubResource( 8 )
-text = "8"
-align = 1
-valign = 1
+LevelNumber = 8
 
 [node name="LevelsRow3" type="HBoxContainer" parent="SelectLevel/CenterHorizontalLevels/CenterVerticalLevels"]
 margin_top = 591.0
@@ -628,93 +478,23 @@ margin_right = 412.0
 margin_bottom = 691.0
 alignment = 1
 
-[node name="Nivel9-Button" type="TextureButton" parent="SelectLevel/CenterHorizontalLevels/CenterVerticalLevels/LevelsRow3"]
-margin_right = 100.0
-margin_bottom = 100.0
-rect_min_size = Vector2( 100, 100 )
-texture_normal = ExtResource( 6 )
-expand = true
-stretch_mode = 5
+[node name="Nivel9-Button" parent="SelectLevel/CenterHorizontalLevels/CenterVerticalLevels/LevelsRow3" instance=ExtResource( 6 )]
+LevelNumber = 9
 
-[node name="Label9" type="Label" parent="SelectLevel/CenterHorizontalLevels/CenterVerticalLevels/LevelsRow3/Nivel9-Button"]
-self_modulate = Color( 0, 0, 0, 1 )
-margin_left = 39.5903
-margin_top = 28.1957
-margin_right = 58.5903
-margin_bottom = 71.1957
-theme = SubResource( 8 )
-text = "9"
-align = 1
-valign = 1
-
-[node name="Nivel10-Button" type="TextureButton" parent="SelectLevel/CenterHorizontalLevels/CenterVerticalLevels/LevelsRow3"]
+[node name="Nivel10-Button" parent="SelectLevel/CenterHorizontalLevels/CenterVerticalLevels/LevelsRow3" instance=ExtResource( 6 )]
 margin_left = 104.0
 margin_right = 204.0
-margin_bottom = 100.0
-rect_min_size = Vector2( 100, 100 )
-texture_normal = ExtResource( 6 )
-expand = true
-stretch_mode = 5
-__meta__ = {
-"_editor_description_": ""
-}
+LevelNumber = 10
 
-[node name="Label10" type="Label" parent="SelectLevel/CenterHorizontalLevels/CenterVerticalLevels/LevelsRow3/Nivel10-Button"]
-self_modulate = Color( 0, 0, 0, 1 )
-margin_left = 29.0229
-margin_top = 28.1957
-margin_right = 67.0229
-margin_bottom = 71.1957
-theme = SubResource( 8 )
-text = "10"
-align = 1
-valign = 1
-
-[node name="Nivel11-Button" type="TextureButton" parent="SelectLevel/CenterHorizontalLevels/CenterVerticalLevels/LevelsRow3"]
+[node name="Nivel11-Button" parent="SelectLevel/CenterHorizontalLevels/CenterVerticalLevels/LevelsRow3" instance=ExtResource( 6 )]
 margin_left = 208.0
 margin_right = 308.0
-margin_bottom = 100.0
-rect_min_size = Vector2( 100, 100 )
-texture_normal = ExtResource( 6 )
-expand = true
-stretch_mode = 5
-__meta__ = {
-"_editor_description_": ""
-}
+LevelNumber = 11
 
-[node name="Label11" type="Label" parent="SelectLevel/CenterHorizontalLevels/CenterVerticalLevels/LevelsRow3/Nivel11-Button"]
-self_modulate = Color( 0, 0, 0, 1 )
-margin_left = 27.4149
-margin_top = 28.1957
-margin_right = 65.4149
-margin_bottom = 71.1957
-theme = SubResource( 8 )
-text = "11"
-align = 1
-valign = 1
-
-[node name="Nivel12-Button" type="TextureButton" parent="SelectLevel/CenterHorizontalLevels/CenterVerticalLevels/LevelsRow3"]
+[node name="Nivel12-Button" parent="SelectLevel/CenterHorizontalLevels/CenterVerticalLevels/LevelsRow3" instance=ExtResource( 6 )]
 margin_left = 312.0
 margin_right = 412.0
-margin_bottom = 100.0
-rect_min_size = Vector2( 100, 100 )
-texture_normal = ExtResource( 6 )
-expand = true
-stretch_mode = 5
-__meta__ = {
-"_editor_description_": ""
-}
-
-[node name="Label12" type="Label" parent="SelectLevel/CenterHorizontalLevels/CenterVerticalLevels/LevelsRow3/Nivel12-Button"]
-self_modulate = Color( 0, 0, 0, 1 )
-margin_left = 29.6464
-margin_top = 28.1957
-margin_right = 67.6464
-margin_bottom = 71.1957
-theme = SubResource( 8 )
-text = "12"
-align = 1
-valign = 1
+LevelNumber = 12
 
 [node name="LevelsRow4" type="HBoxContainer" parent="SelectLevel/CenterHorizontalLevels/CenterVerticalLevels"]
 margin_top = 695.0
@@ -722,48 +502,15 @@ margin_right = 412.0
 margin_bottom = 795.0
 alignment = 1
 
-[node name="Nivel1-Button" type="TextureButton" parent="SelectLevel/CenterHorizontalLevels/CenterVerticalLevels/LevelsRow4"]
+[node name="Nivel13-Button" parent="SelectLevel/CenterHorizontalLevels/CenterVerticalLevels/LevelsRow4" instance=ExtResource( 6 )]
 margin_left = 104.0
 margin_right = 204.0
-margin_bottom = 100.0
-rect_min_size = Vector2( 100, 100 )
-texture_normal = ExtResource( 6 )
-expand = true
-stretch_mode = 5
+LevelNumber = 13
 
-[node name="Label13" type="Label" parent="SelectLevel/CenterHorizontalLevels/CenterVerticalLevels/LevelsRow4/Nivel1-Button"]
-self_modulate = Color( 0, 0, 0, 1 )
-margin_left = 29.0229
-margin_top = 29.5143
-margin_right = 67.0229
-margin_bottom = 72.5143
-theme = SubResource( 8 )
-text = "13"
-align = 1
-valign = 1
-
-[node name="Nivel2-Button" type="TextureButton" parent="SelectLevel/CenterHorizontalLevels/CenterVerticalLevels/LevelsRow4"]
+[node name="Nivel14-Button" parent="SelectLevel/CenterHorizontalLevels/CenterVerticalLevels/LevelsRow4" instance=ExtResource( 6 )]
 margin_left = 208.0
 margin_right = 308.0
-margin_bottom = 100.0
-rect_min_size = Vector2( 100, 100 )
-texture_normal = ExtResource( 6 )
-expand = true
-stretch_mode = 5
-__meta__ = {
-"_editor_description_": ""
-}
-
-[node name="Label14" type="Label" parent="SelectLevel/CenterHorizontalLevels/CenterVerticalLevels/LevelsRow4/Nivel2-Button"]
-self_modulate = Color( 0, 0, 0, 1 )
-margin_left = 27.4149
-margin_top = 33.415
-margin_right = 65.4149
-margin_bottom = 76.415
-theme = SubResource( 8 )
-text = "14"
-align = 1
-valign = 1
+LevelNumber = 14
 
 [node name="BackButton" type="TextureButton" parent="SelectLevel"]
 margin_left = 505.56
