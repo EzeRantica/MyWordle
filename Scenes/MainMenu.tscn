@@ -689,6 +689,7 @@ tracks/13/keys = {
 }
 
 [node name="MainMenu" type="Node2D"]
+position = Vector2( -2, 0 )
 script = ExtResource( 4 )
 
 [node name="TextureRect" type="TextureRect" parent="."]
@@ -1064,7 +1065,6 @@ margin_right = 545.56
 margin_bottom = 58.5283
 texture_normal = ExtResource( 5 )
 expand = true
-stretch_mode = 4
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 autoplay = "RESET"

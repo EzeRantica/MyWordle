@@ -1,8 +1,8 @@
 extends Node2D
 
 ## VALORES A CAMBIAR POR CADA NIVEL ################################################################
-export(String) var CURRENT_WORD = "PERROS"
-export(String) var WORD_MESSAGE = "Aunque me diga lo contrario (no dice lo contrario)\n yo sé que ama más a los perros\nque a mí"
+export(String) var CURRENT_WORD = "CUATRO"
+export(String) var WORD_MESSAGE = "En este 10 de Febrero, 24 años, difícil de creer teniendo en cuenta que sos prácticamente un bebé. Como todas las personas que nacieron del 1999 en adelante.\n\nFeliz cumple :)"
 var CURRENT_WORD_ARRAY = {}
 var CURRENT_WORD_POSITIONS = {}
 var LETTER_COUNT : int

@@ -1,10 +1,11 @@
-[gd_scene load_steps=14 format=2]
+[gd_scene load_steps=15 format=2]
 
 [ext_resource path="res://Scripts/Nivel2.gd" type="Script" id=1]
 [ext_resource path="res://Letras/White_texture.png" type="Texture" id=2]
 [ext_resource path="res://UI/Micarle_Title.png" type="Texture" id=3]
 [ext_resource path="res://Fonts/HelveticaNeueBold.ttf" type="DynamicFontData" id=4]
 [ext_resource path="res://UI/HealthFull.png" type="Texture" id=5]
+[ext_resource path="res://Scenes/ExitButton.tscn" type="PackedScene" id=6]
 [ext_resource path="res://Audio/Laptop_Keystroke_82.wav" type="AudioStream" id=7]
 [ext_resource path="res://Scripts/CurrentColDebug.gd" type="Script" id=8]
 
@@ -225,3 +226,5 @@ bus = "Sounds"
 
 [node name="SFXPlayer_Delete" type="AudioStreamPlayer" parent="Main"]
 bus = "Sounds_2"
+
+[node name="ExitButton" parent="." instance=ExtResource( 6 )]

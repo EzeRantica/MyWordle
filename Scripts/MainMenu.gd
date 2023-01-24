@@ -1,13 +1,14 @@
 extends Node2D
 
 func _ready() -> void:
-	$Main/StartGame.connect("pressed", self, "_on_StartGame_pressed")
-	$Main/SelectLevel.connect("pressed", self, "_on_SelectLevel_pressed")
-	$Main/Options.connect("pressed", self, "_on_Options_pressed")
-	$Options/BackButton.connect("pressed", self, "_on_BackFromOptions_pressed")
-	$SelectLevel/BackButton.connect("pressed", self, "_on_BackFromSelectLevel_pressed")
+	var _con = $Main/StartGame.connect("pressed", self, "_on_StartGame_pressed")
+	_con = $Main/SelectLevel.connect("pressed", self, "_on_SelectLevel_pressed")
+	_con = $Main/Options.connect("pressed", self, "_on_Options_pressed")
+	_con = $Options/BackButton.connect("pressed", self, "_on_BackFromOptions_pressed")
+	_con = $SelectLevel/BackButton.connect("pressed", self, "_on_BackFromSelectLevel_pressed")
 	
 	####### CONEXIÓN CON LOS BOTONES DE NIVELES
+<<<<<<< HEAD
 <<<<<<< HEAD
 	$"SelectLevel/CenterHorizontalLevels/CenterVerticalLevels/LevelsRow1/Nivel1-Button".connect("pressed", self, "NivelPressed", [2023, 01, 01, "res://Scenes/Nivel1.tscn", "Nivel1"])
 	$"SelectLevel/CenterHorizontalLevels/CenterVerticalLevels/LevelsRow1/Nivel2-Button".connect("pressed", self, "NivelPressed", [2023, 01, 02, "res://Scenes/Nivel2.tscn", "Nivel2"])
@@ -23,6 +24,22 @@ func _ready() -> void:
 	$"SelectLevel/CenterHorizontalLevels/CenterVerticalLevels/LevelsRow3/Nivel12-Button".connect("pressed", self, "NivelPressed", [2023, 01, 12, "res://Scenes/Nivel12.tscn", "Nivel12"])
 	$"SelectLevel/CenterHorizontalLevels/CenterVerticalLevels/LevelsRow4/Nivel13-Button".connect("pressed", self, "NivelPressed", [2023, 01, 13, "res://Scenes/Nivel13.tscn", "Nivel13"])
 	$"SelectLevel/CenterHorizontalLevels/CenterVerticalLevels/LevelsRow4/Nivel14-Button".connect("pressed", self, "NivelPressed", [2023, 01, 14, "res://Scenes/Nivel14.tscn", "Nivel14"])
+=======
+	_con = $"SelectLevel/CenterHorizontalLevels/CenterVerticalLevels/LevelsRow1/Nivel1-Button".connect("pressed", self, "NivelPressed", [2023, 01, 01, "res://Scenes/Nivel1.tscn", "Nivel1"])
+	_con = $"SelectLevel/CenterHorizontalLevels/CenterVerticalLevels/LevelsRow1/Nivel2-Button".connect("pressed", self, "NivelPressed", [2023, 01, 02, "res://Scenes/Nivel2.tscn", "Nivel2"])
+	_con = $"SelectLevel/CenterHorizontalLevels/CenterVerticalLevels/LevelsRow1/Nivel3-Button".connect("pressed", self, "NivelPressed", [2023, 02, 03, "res://Scenes/Nivel3.tscn", "Nivel3"])
+	_con = $"SelectLevel/CenterHorizontalLevels/CenterVerticalLevels/LevelsRow1/Nivel4-Button".connect("pressed", self, "NivelPressed", [2023, 02, 04, "res://Scenes/Nivel4.tscn", "Nivel4"])
+	_con = $"SelectLevel/CenterHorizontalLevels/CenterVerticalLevels/LevelsRow2/Nivel5-Button".connect("pressed", self, "NivelPressed", [2023, 02, 05, "res://Scenes/Nivel5.tscn", "Nivel5"])
+	_con = $"SelectLevel/CenterHorizontalLevels/CenterVerticalLevels/LevelsRow2/Nivel6-Button".connect("pressed", self, "NivelPressed", [2023, 02, 06, "res://Scenes/Nivel6.tscn", "Nivel6"])
+	_con = $"SelectLevel/CenterHorizontalLevels/CenterVerticalLevels/LevelsRow2/Nivel7-Button".connect("pressed", self, "NivelPressed", [2023, 02, 07, "res://Scenes/Nivel7.tscn", "Nivel7"])
+	_con = $"SelectLevel/CenterHorizontalLevels/CenterVerticalLevels/LevelsRow2/Nivel8-Button".connect("pressed", self, "NivelPressed", [2023, 02, 08, "res://Scenes/Nivel8.tscn", "Nivel8"])
+	_con = $"SelectLevel/CenterHorizontalLevels/CenterVerticalLevels/LevelsRow3/Nivel9-Button".connect("pressed", self, "NivelPressed", [2023, 02, 09, "res://Scenes/Nivel9.tscn", "Nivel9"])
+	_con = $"SelectLevel/CenterHorizontalLevels/CenterVerticalLevels/LevelsRow3/Nivel10-Button".connect("pressed", self, "NivelPressed", [2023, 02, 10, "res://Scenes/Nivel10.tscn", "Nivel10"])
+	_con = $"SelectLevel/CenterHorizontalLevels/CenterVerticalLevels/LevelsRow3/Nivel11-Button".connect("pressed", self, "NivelPressed", [2023, 02, 11, "res://Scenes/Nivel11.tscn", "Nivel11"])
+	_con = $"SelectLevel/CenterHorizontalLevels/CenterVerticalLevels/LevelsRow3/Nivel12-Button".connect("pressed", self, "NivelPressed", [2023, 02, 12, "res://Scenes/Nivel12.tscn", "Nivel12"])
+	_con = $"SelectLevel/CenterHorizontalLevels/CenterVerticalLevels/LevelsRow4/Nivel13-Button".connect("pressed", self, "NivelPressed", [2023, 02, 13, "res://Scenes/Nivel13.tscn", "Nivel13"])
+	_con = $"SelectLevel/CenterHorizontalLevels/CenterVerticalLevels/LevelsRow4/Nivel14-Button".connect("pressed", self, "NivelPressed", [2023, 02, 14, "res://Scenes/Nivel14.tscn", "Nivel14"])
+>>>>>>> Mobile2
 ####################################################################################################################################
 =======
 	$"SelectLevel/CenterHorizontalLevels/CenterVerticalLevels/LevelsRow1/Nivel1-Button".connect("pressed", self, "NivelPressed", [2023, 02, 01, "res://Scenes/Nivel1.tscn"])
